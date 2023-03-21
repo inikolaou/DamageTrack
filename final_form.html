@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Damage Report Form</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="form2.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <form>
+            <div class="row mt-3">
+                <div class="col-md-3 offset-md-2 col-5">
+                    <div class="input-group">
+                        <span id="details" class="input-group-text w-25">1</span>
+                        <span type="text"  id="headers" class="form-control" >Details</span>
+                    </div>
+                </div>
+                <div class="col-md-3 offset-md-2 col-5 ">
+                    <div class="input-group">
+                        <span id="location" class="input-group-text w-25">2</span>
+                        <span type="text"  id="headers" class="form-control" >Location</span>
+                    </div>
+                </div>
+            
+            </div>
+            <div id="details-section" class="mt-5">
+                <label id="section_label" class="mb-4 fs-5 fw-bold">Details</label>
+                <div class="mb-4 w-50">
+                    <label for="category" class="form-label mb-3">Category</label>
+                    <select id="category" name="category" class="form-select">
+                        <option value="water">Water Damage</option>
+                        <option value="fire">Fire Damage</option>
+                        <option value="mold">Mold Damage</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div id="other-category" class="mb-4 w-50 d-none">
+                    <label for="other-category" class="form-label mb-3">Other Category</label>
+                    <input type="text" id="other-category" name="other-category" class="form-control">
+                </div>
+
+                <div class="mb-4">
+                    <label for="description" class="form-label ">Description</label>
+                    <textarea id="description" name="description" class="form-control w-75" rows="3"></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label for="customRange2" class="form-label">Urgency level</label>
+                    <div class="range w-50">
+                        <input type="range" class="form-range" min="0" max="3" id="customRange2" >
+                        <!-- <datalist id="tickmarks">
+                            <option value="0" label="Low"></option>
+                            <option value="1" label="Medium"></option>
+                            <option value="2" label="High"></option>
+                            <option value="3" label="Very High"></option>
+                        </datalist> -->
+                    </div>
+                </div>
+
+                <div class="mb-4 w-75">
+                    <label for="photo" class="form-label">Photo</label>
+                    <input type="file" id="photo" name="photo" class="form-control">
+                </div>
+                <div class="submit_section">
+                    <button id="next-btn" type="button" class="btn btn-primary">Next</button>
+                </div>
+            </div>
+            <div id="location-section" class="mt-5 d-none">
+                <label id="section_label" class="mb-4 fs-5 fw-bold">Location</label>
+                <div class="mb-4 w-75">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" id="city" name="city" class="form-control" placeholder="Athens">
+                </div>
+
+                <label for="street" class="form-label">Address</label>
+                <div class="input-group mb-3 w-75"> 
+                    <span class="input-group-text">Street</span>
+                    <input type="text" id="street" class="form-control" placeholder="Evrou" aria-label="Username">
+                    <span class="input-group-text">Number</span>
+                    <input type="number" id="number" class="form-control" placeholder="51" aria-label="Server">
+                </div>
+
+                <div class="mb-4 w-75">
+                    <label for="zi0" class="form-label">City</label>
+                    <input type="number" id="zip" name="zip" class="form-control" placeholder="15234">
+                </div>
+                <div class="submit_section">
+                    <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+                  
+        </form>
+    </div>
+
+    <script>
+        let detailsSection = document.querySelector("#details-section");
+        let locationSection = document.querySelector("#location-section");
+        let nextBtn = document.querySelector("#next-btn");
+        let submitBtn = document.querySelector("#submit-btn");
+        let locationLabel = document.querySelector("#location");
+
+        nextBtn.addEventListener("click", () => {
+            detailsSection.classList.add("d-none");
+            locationSection.classList.remove("d-none");
+            locationLabel.style.backgroundColor = "#33cccc";
+        });
+
+        submitBtn.addEventListener("click", () => {
+            locationSection.classList.add("d-none");
+            detailsSection.classList.remove("d-none");
+        });
+
+        let categorySelect = document.querySelector("#category");
+        let othercategorySelect = document.querySelector("#other-category")
+
+        categorySelect.addEventListener("change", () => {
+            if (categorySelect.value === "other") {
+                othercategorySelect.classList.remove("d-none");
+            } else {
+                othercategorySelect.classList.add("d-none");
+            }
+        });
+    </script>
+</body>
+</html>
