@@ -1,0 +1,41 @@
+body{
+    background: #142d4c; 
+    font-family: 'Roboto', sans-serif;
+    color: grey;
+    
+}
+.card{
+    background-color: #ececec;
+}
+
+
+.high .card-header{
+    color: red;
+}
+
+.medium .card-header{
+    color: rgb(45, 172, 200);
+}
+
+.low .card-header{
+    color: rgb(76, 177, 76);
+}
+
+.btn{
+    background-color: #33cccc;
+    color: white
+}
+
+.modal-body li span{
+    font-weight: bold;
+    border-right: 3px solid #33cccc;
+    padding-right: 1em;;
+}
+
+.modal-body p{
+    font-style: italic;
+}
+
+.dropdown-item.active{
+    background-color: #33cccc;
+}
