@@ -20,34 +20,53 @@
 
         .container {
             border-radius: 10px;
-            border: 1px solid black;
             background-color: #ececec;
+        }
+
+        @media screen and (min-width: 500px) {
+
+            .container {
+                max-width: 500px;
+            }
+
+            .rounded {
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+
+            .container {
+                max-width: 690px;
+            }
+
+            .rounded {
+                border-top-right-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+            }
         }
 
         .col:nth-of-type(2) {
             margin: 1rem;
         }
 
-        .rounded {
-            border-top-right-radius: 0 !important;
-            border-bottom-right-radius: 0 !important;
+        #signUp {
+            display: none;
         }
-
-       
-
     </style>
 </head>
 
 <body>
-    <div class="container mt-5 w-75">
-        <div class="row align-items-center justify-content-center ">
+    <div class="container mt-5 w-100" id="login">
+        <div class="row row-cols-2 align-items-center justify-content-center ">
             <div class="col-md-6 px-0 col-12">
                 <img src="background.png" class="rounded img-fluid" alt="bumpy road">
             </div>
             <div class="col-md-6 col-12">
                 <h4>Login</h4>
                 <form class="row g-3 needs-validation" novalidate>
-                    <div class="input-group  has-validation mb-3">
+                    <div class="input-group has-validation mb-3">
                         <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                                 <path
@@ -56,16 +75,17 @@
                         <div class="form-floating">
                             <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com"
                                 required>
+                            <div class="invalid-feedback" style="right: 0; position: absolute;">
+                                Please provide a valid email.
+                            </div>
+                            <div class="valid-feedback" style="right: 0; position: absolute;">
+                                Looks good!
+                            </div>
                             <label for="loginEmail">Email address</label>
                         </div>
-                        <div class="invalid-feedback">
-                            Please provide a valid email.
-                        </div>
-                        
-                        
                     </div>
                     <div class="input-group mb-3">
-                        
+
                         <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
                                 <path
@@ -74,12 +94,15 @@
                         <div class="form-floating flex-grow-1">
                             <input type="password" class="form-control" id="loginPassword" placeholder="Password"
                                 required>
+                            <div class="invalid-feedback" style="right: 0; position: absolute;">
+                                Please provide a valid password.
+                            </div>
+                            <div class="valid-feedback" style="right: 0; position: absolute;">
+                                Looks good!
+                            </div>
                             <label for="loginPassword">Password</label>
                         </div>
                         <span id="eye" class="input-group-text"><img src="eye-slash.svg"></span>
-                    </div>
-                    <div class="invalid-feedback">
-                        Please provide a valid password.
                     </div>
 
                     <div class="d-grid col-6 mx-auto">
@@ -88,7 +111,67 @@
                 </form>
                 <hr>
                 <div class="text-center p-3">
-                    Don't have an account? <a href="#signUp">Sign up</a>
+                    Don't have an account? <a id="signUpLink" href="#signUp">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 w-100" id="signUp">
+        <div class="row align-items-center justify-content-center ">
+            <div class="col-md-6 px-0 col-12">
+                <img src="background2.png" class="rounded img-fluid" alt="bumpy road">
+            </div>
+            <div class="col-md-6 col-12">
+                <h4>Sign Up</h4>
+                <form class="row g-3 needs-validation" novalidate>
+                    <div class="input-group form-floating has-validation mb-3">
+                        <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                            </svg></span>
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="signUpEmail" placeholder="name@example.com"
+                                required>
+                            <div class="invalid-feedback" style="right: 0; position: absolute;">
+                                Please provide a valid email.
+                            </div>
+                            <div class="valid-feedback" style="right: 0; position: absolute;">
+                                Looks good!
+                            </div>
+                            <label for="signUpEmail">Email address</label>
+                        </div>
+
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" />
+                            </svg></span>
+                        <div class="form-floating flex-grow-1">
+                            <input type="password" class="form-control" id="signUpPassword" placeholder="Password"
+                                required>
+                            <div class="invalid-feedback" style="right: 0; position: absolute;">
+                                Please provide a valid password.
+                            </div>
+                            <div class="valid-feedback" style="right: 0; position: absolute;">
+                                Looks good!
+                            </div>
+                            <label for="signUpPassword">Password</label>
+                        </div>
+                        <span id="signUpEye" class="input-group-text"><img src="eye-slash.svg"></span>
+                    </div>
+
+                    <div class="d-grid col-6 mx-auto">
+                        <input class="btn btn-primary" type="submit" value="SIGNUP">
+                    </div>
+                </form>
+                <hr>
+                <div class="text-center p-3">
+                    Already have an account? <a id="loginLink" href="#login">Login</a>
                 </div>
             </div>
         </div>
@@ -101,6 +184,11 @@
         const emailField = document.getElementById("loginEmail");
         const passwordField = document.getElementById("loginPassword");
         const passwordIcon = document.getElementById("eye");
+        const signUpEmailField = document.getElementById("signUpEmail");
+        const signUpPasswordField = document.getElementById("signUpPassword");
+        const signUpPasswordIcon = document.getElementById("signUpEye");
+        const signUpLink = document.getElementById("signUpLink");
+        const loginLink = document.getElementById("loginLink");
 
         emailField.addEventListener("click", function (event) {
             let emoji = emailField.parentElement.parentElement.firstElementChild;
@@ -122,6 +210,40 @@
             emoji.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16"> <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" /> </svg>'
         });
 
+        signUpEmailField.addEventListener("click", function (event) {
+            let emoji = signUpEmailField.parentElement.parentElement.firstElementChild;
+            emoji.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16"><path d = "M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/></svg>'
+        });
+
+        signUpEmailField.addEventListener("blur", function (event) {
+            let emoji = signUpEmailField.parentElement.parentElement.firstElementChild;
+            emoji.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" /></svg>'
+        });
+
+        signUpPasswordField.addEventListener("click", function (event) {
+            let emoji = signUpPasswordField.parentElement.parentElement.firstElementChild;
+            emoji.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>'
+        });
+
+        signUpPasswordField.addEventListener("blur", function (event) {
+            let emoji = signUpPasswordField.parentElement.parentElement.firstElementChild;
+            emoji.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16"> <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" /> </svg>'
+        });
+
+        signUpLink.addEventListener("click", function (event) {
+            let signUpForm = document.getElementById("signUp");
+            let loginForm = document.getElementById("login");
+            loginForm.style.display = "none";
+            signUpForm.style.display = "block";
+        });
+
+        loginLink.addEventListener("click", function (event) {
+            let signUpForm = document.getElementById("signUp");
+            let loginForm = document.getElementById("login");
+            loginForm.style.display = "block";
+            signUpForm.style.display = "none";
+        });
+
         passwordIcon.addEventListener("click", function () {
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
@@ -133,6 +255,20 @@
             else if (passwordField.type === 'text') {
                 passwordField.type = 'password';
                 passwordIcon.innerHTML = `<img src="eye-slash.svg">`;
+            }
+        });
+
+        signUpPasswordIcon.addEventListener("click", function () {
+            if (signUpPasswordField.type === 'password') {
+                signUpPasswordField.type = 'text';
+                signUpPasswordIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                                        <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+                                        </svg>`;
+            }
+            else if (signUpPasswordField.type === 'text') {
+                signUpPasswordField.type = 'password';
+                signUpPasswordIcon.innerHTML = `<img src="eye-slash.svg">`;
             }
         });
 
