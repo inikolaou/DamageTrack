@@ -1,0 +1,78 @@
+body {
+    margin: 10px;
+    background-color: #385170;
+}
+
+.show-warning {
+    right: 0;
+    position: absolute;
+}
+
+#eye {
+    background-color: white;
+}
+
+.container {
+    border-radius: 10px;
+    background-color: #ececec;
+    min-width: 320px;
+}
+
+.rounded {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+@media screen and (min-width: 500px) {
+
+    .container {
+        max-width: 500px;
+    }
+
+    .rounded {
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+    .container {
+        max-width: 930px;
+    }
+
+    .rounded {
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+}
+
+.col:nth-of-type(2) {
+    margin: 1rem;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle~.circle {
+    background-color: gray;
+}
+
+.line {
+    border: 1px solid #007bff;
+    margin: 0;
+    flex-grow: 1;
+}
+
+#signUp {
+    display: none;
+}
