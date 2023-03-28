@@ -1,6 +1,42 @@
 body {
-    margin: 10px;
+    margin-bottom: 10px;
+    background-color: #142d4c;
+}
+
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    padding: 0;
+    justify-content: space-around;
     background-color: #385170;
+}
+
+.navbar-brand {
+    --bs-navbar-brand-color: #ececec !important;
+}
+
+.navbar-brand:focus, .navbar-brand:hover {
+    --bs-navbar-brand-hover-color: #ececec !important;
+}
+
+.navbar .container {
+    margin: 0;
+} 
+
+.btn-primary {
+    background-color: #142d4c;
+    --bs-btn-hover-bg: #385170;
+}
+
+a {
+    --bs-link-color-rgb: #142d4c;
+}
+
+a:hover {
+    --bs-link-hover-color-rgb: #385170;
 }
 
 .show-warning {
@@ -12,7 +48,7 @@ body {
     background-color: white;
 }
 
-.container {
+#login.container, #signUp.container {
     border-radius: 10px;
     background-color: #ececec;
     min-width: 320px;
@@ -55,7 +91,7 @@ body {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: #007bff;
+    background-color: #385170;
     color: white;
     font-weight: bold;
     display: flex;
@@ -68,7 +104,7 @@ body {
 }
 
 .line {
-    border: 1px solid #007bff;
+    border: 1px solid #385170;
     margin: 0;
     flex-grow: 1;
 }
