@@ -49,7 +49,7 @@ signUpNext.addEventListener("click", function (event) {
 
             signUpBack.disabled = false;
 
-            currentCircle.style.backgroundColor = '#007bff';
+            currentCircle.style.backgroundColor = '#385170';
             prevCircle.style.backgroundColor = 'green';
 
             if (group === 3) {
