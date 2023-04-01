@@ -16,6 +16,27 @@
 
 <body>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Report</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Homepage</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Sign Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
     <div class="container">
         <form class="needs-validation" novalidate>
             <div class="row mt-3">
@@ -59,7 +80,7 @@
 
                 <div class="mb-4">
                     <label for="description" class="form-label ">Description</label>
-                    <textarea id="description" name="description" class="form-control w-75" rows="3" pattern="[a-zA-Z]+" required></textarea>
+                    <textarea id="description" name="description" class="form-control w-75" rows="3"  pattern="^[a-zA-Z].*" required></textarea>
                     <div class="invalid-feedback show-warning">
                         Please provide a valid description.
                     </div>
@@ -84,7 +105,7 @@
                     <label for="photo" class="form-label">Photo</label>
                     <input type="file" id="photo" name="photo" class="form-control" required>
                     <div class="invalid-feedback show-warning">
-                        Please provide a valid email.
+                        Please provide a photo.
                     </div>
                     <div class="valid-feedback show-warning">
                         Looks good!
@@ -112,7 +133,7 @@
                     <span class="input-group-text">Street</span>
                     <input type="text" id="street" class="form-control" placeholder="Evrou" aria-label="Username" required>
                     <span class="input-group-text">Number</span>
-                    <input type="number" id="number" class="form-control" placeholder="51" aria-label="Server" required>
+                    <input type="number" id="number" class="form-control" placeholder="51" pattern="^[0-9]*[1-9][0-9]*$" aria-label="Server" required>
                     <div class="invalid-feedback show-warning">
                         Please provide a valid address.
                     </div>
@@ -123,7 +144,7 @@
 
                 <div class="mb-4 w-75">
                     <label for="zip" class="form-label">ZIP</label>
-                    <input type="number" id="zip" name="zip" class="form-control" placeholder="15234" maxlength="20"  required>
+                    <input type="number" id="zip" name="zip" class="form-control" placeholder="15234" maxlength="20" pattern="^[0-9]*[1-9][0-9]*$"  required>
                     <div class="invalid-feedback show-warning">
                         Please provide a valid zip code.
                     </div>
