@@ -104,7 +104,7 @@
 
 [data-bs-theme=light] .btn-outline-secondary { /* for article buttons */
     --bs-btn-color: #385170 !important;
-    --bs-btn-hover-color: #9fd3c7;
+    --bs-btn-hover-color: #385170;
     --bs-btn-active-color: #9fd3c7; 
     --bs-btn-disabled-color: #9fd3c7; 
     --bs-btn-bg: #9fd3c7;  
@@ -125,6 +125,25 @@
 
 [data-bs-theme=light] .navbar {
     background-color: #9fd3c7 !important;
+}
+
+[data-bs-theme=light] .list-group-item {
+    border-bottom: 1px solid #385170;
+}
+
+.list-group-item {
+    padding-left: 0;
+    border: 1px solid #ececec;
+}
+
+.btn-outline-secondary  {
+    border: 0;
+    transition: transform .2s;
+}
+
+.btn-outline-secondary:hover  {
+    transform: scale(1.1);
+    background-color: initial;
 }
 
 .bd-placeholder-img {
