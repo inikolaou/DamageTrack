@@ -1,56 +1,85 @@
-body{
-    background: #142d4c; 
+body {
+    background: #142d4c;
     font-family: 'Roboto', sans-serif;
-    color: grey;
-    
+    color: gray;
 }
-.card{
+
+.card {
     background-color: #ececec;
     max-width: 350px;
     box-shadow: rgba(50, 50, 93, 0.35) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 30px 60px -30px, rgba(10, 37, 64, 0.5) 0px -2px 6px 0px inset;
 }
 
-
-.high .card-header{
+.high .card-header {
     color: red;
 }
 
-.medium .card-header{
+.medium .card-header {
     color: rgb(45, 172, 200);
 }
 
-.low .card-header{
+.low .card-header {
     color: rgb(76, 177, 76);
 }
 
-.btn{
+.btn {
     background-color: #33cccc;
     color: white
 }
 
-.modal-body li span{
+.modal-body li span {
     font-weight: bold;
     border-right: 3px solid #33cccc;
-    padding-right: 1em;;
+    padding-right: 1em;
 }
 
-.modal-body p{
+.modal-body p {
     font-style: italic;
 }
 
-.dropdown-item.active{
+.dropdown-item.active {
     background-color: #33cccc;
 }
-.card .card-img-bottom {
-    display: none;
-    transition-duration: 4s;
-    transition-delay: 2s;
+
+.filters {
+    margin-top: 5rem;
 }
 
-.card:hover .card-img-bottom {
-    display: block;
-  }
+#button-addon2 {
+    z-index: 0;
+}
 
-.modal-body li span.like-tag{
+.image-block {
+    display: none;
+    opacity: 0;
+}
+
+.card:hover .image-block {
+    display: block;
+    animation: fadeIn 3s forwards;
+}
+
+.image-block img {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 3s ease;
+}
+
+.card:hover .image-block img {
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-body li span.like-tag {
     border: 0;
 }
