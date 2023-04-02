@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Admin dashboard</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/colors.css">
     <link rel="stylesheet" href="adm_dashboard.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js" defer></script>
 </head>
+
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Homepage</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Sign Out</a>
-              </li>
-            </ul>
-          </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Homepage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <div class="row mt-5 mb-5 filters ">
         <div class="col-4 offset-md-2 ">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Location..." aria-label="Search location" aria-describedby="button-addon2">
+                <input type="text" class="form-control" placeholder="Location..." aria-label="Search location"
+                    aria-describedby="button-addon2">
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
             </div>
         </div>
 
         <div class="col offset-md-2 ">
             <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="urgency-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="urgency-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Urgency
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="urgency-dropdown">
@@ -55,7 +61,8 @@
 
         <div class="col">
             <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="status-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="status-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Status
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="status-dropdown">
@@ -67,10 +74,10 @@
             </div>
         </div>
     </div>
-        
-  
+
+
     <div class="container pt-5">
-        
+
         <div class="row row-cols-1 row-cols-md-3 g-4 g-md-5">
             <div class="col">
                 <div class="card high">
@@ -84,11 +91,14 @@
                             <li>Norman 94</li>
                         </ul>
                         <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"">See More</a>
-                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
-                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-                          </svg>10
-                        </span>
+                        <span class=" like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg>10
+                            </span>
                     </div>
                     <div class="card-footer"></div>
                 </div>
@@ -105,10 +115,13 @@
                             <li>Norman 94</li>
                         </ul>
                         <a href="#" class="btn">See More</a>
-                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
-                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-                          </svg>10
+                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg>10
                         </span>
                     </div>
                     <div class="card-footer"></div>
@@ -126,10 +139,13 @@
                             <li>Norman 94</li>
                         </ul>
                         <a href="#" class="btn">See More</a>
-                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
-                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-                          </svg>10
+                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg>10
                         </span>
                     </div>
                     <div class="card-footer"></div>
@@ -147,10 +163,13 @@
                             <li>Norman 94</li>
                         </ul>
                         <a href="#" class="btn">See More</a>
-                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
-                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-                          </svg>10
+                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg>10
                         </span>
                     </div>
                     <div class="card-footer"></div>
@@ -168,10 +187,13 @@
                             <li>Norman 94</li>
                         </ul>
                         <a href="#" class="btn">See More</a>
-                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
-                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-                          </svg>10
+                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg>10
                         </span>
                     </div>
                     <div class="card-footer"></div>
@@ -189,65 +211,72 @@
                             <li>Norman 94</li>
                         </ul>
                         <a href="#" class="btn ">See More</a>
-                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
-                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-                          </svg>10
+                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg>10
                         </span>
                     </div>
                     <div class="card-footer"></div>
                 </div>
             </div>
         </div>
-        
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable"">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Fire Damage</h1>
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <ul>
-                                <li><span>City</span> Patra</li>
-                                <li><span>Street</span> Norman 94</li>
-                                <li><span>ZIP Code</span> 15234</li>
-                                <li><span>Urgency Level</span> High</li>
-                                <li><span class="like-tag"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
-                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-                                  </svg>10
-                                </span></li>
-                            </ul>
-                            <p>Here goes the description of the damage</p>
-                            <img src="fire-damage.jpg" class="card-img-bottom pt-4 " alt="...">
-                            <div class="form">
-                                <div class="mt-4 w-50">
-                                    <label for="status" class="form-label mb-1">Status</label>
-                                    <select id="status" name="status" class="form-select">
-                                        <option value="pending">Pending</option>
-                                        <option value="ongoing">Ongoing</option>
-                                        <option value="finished">Finished</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable"">
+                    <div class=" modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Fire Damage</h1>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li><span>City</span> Patra</li>
+                        <li><span>Street</span> Norman 94</li>
+                        <li><span>ZIP Code</span> 15234</li>
+                        <li><span>Urgency Level</span> High</li>
+                        <li><span class="like-tag"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                    fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
+                                    <path
+                                        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                                </svg>10
+                            </span></li>
+                    </ul>
+                    <p>Here goes the description of the damage</p>
+                    <img src="fire-damage.jpg" class="card-img-bottom pt-4 " alt="...">
+                    <div class="form">
+                        <div class="mt-4 w-50">
+                            <label for="status" class="form-label mb-1">Status</label>
+                            <select id="status" name="status" class="form-select">
+                                <option value="pending">Pending</option>
+                                <option value="ongoing">Ongoing</option>
+                                <option value="finished">Finished</option>
+                            </select>
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
-      
+        </div>
+    </div>
+
     </div>
 
     <script>
-        
-       
-    </script> 
-    
+
+
+    </script>
+
 
 </body>
+
 </html>

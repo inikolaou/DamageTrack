@@ -1,0 +1,194 @@
+:root {
+    /* For description letters */
+    --bs-secondary-color: #ececec;
+    /* For article letters */
+    --bs-body-color: #ececec;
+}
+
+[data-bs-theme=dark] {
+    /* For article and footer color */
+    --bs-body-bg: #142d4c;
+    --bs-btn-hover-bg: #ececec;
+}
+
+[data-bs-theme=dark] .card {
+    --bs-card-bg: #385170;
+}
+
+[data-bs-theme=dark] footer {
+    background-color: #385170;
+}
+
+[data-bs-theme=dark] .list-group-item {
+    background-color: #385170;
+}
+
+/* for like button */
+[data-bs-theme=dark] .bg-info {
+    color: #385170 !important;
+    background-color: #9fd3c7 !important;
+}
+
+/* button letters */
+[data-bs-theme=dark] .btn-outline-secondary {
+    --bs-btn-color: #ececec !important;
+}
+
+[data-bs-theme=dark] .navbar {
+    background-color: #385170 !important;
+}
+
+[data-bs-theme=dark] #bd-theme {
+    background-color: #385170 !important;
+    border-color: #385170 !important;
+}
+
+/* for login button */
+[data-bs-theme=dark] .btn-primary {
+    --bs-btn-color: #ececec;
+    --bs-btn-hover-color: #ececec;
+    --bs-btn-active-color: #ececec;
+    --bs-btn-disabled-color: #ececec;
+    --bs-btn-bg: #385170;
+    --bs-btn-border-color: #385170;
+    --bs-btn-hover-bg: #385170;
+    --bs-btn-hover-border-color: #385170;
+    --bs-btn-active-bg: #385170;
+    --bs-btn-active-border-color: #385170;
+}
+
+/* article background color */
+[data-bs-theme=dark] .bg-body-tertiary {
+    background-color: #142d4c !important;
+}
+
+/* fix section color */
+[data-bs-theme=dark] main {
+    background-color: #142d4c !important;
+}
+
+[data-bs-theme=light] {
+    --bs-secondary-color: #385170;
+    --bs-heading-color: #385170;
+    --bs-body-color: #385170;
+    --bs-body-bg: #ececec;
+    --bs-btn-bg: #385170;
+    --bs-btn-hover-bg: #385170;
+}
+
+[data-bs-theme=light] .card {
+    --bs-card-bg: #9fd3c7;
+}
+
+[data-bs-theme=light] footer {
+    background-color: #9fd3c7;
+}
+
+[data-bs-theme=light] .list-group-item {
+    background-color: #9fd3c7;
+}
+
+/* DamageTrack title */
+[data-bs-theme=light] .fw-light {
+    --bs-heading-color: #ececec;
+}
+
+/* DamageTrack description */
+[data-bs-theme=light] .lead {
+    --bs-secondary-color: #ececec;
+}
+
+[data-bs-theme=light] #bd-theme {
+    background-color: #9fd3c7 !important;
+    border-color: #9fd3c7 !important;
+}
+
+/* like colors */
+[data-bs-theme=light] .bg-info {
+    color: #ececec !important;
+    background-color: #385170 !important;
+}
+
+/* Github link color */
+[data-bs-theme=light] .text-white {
+    color: #385170 !important;
+}
+
+/* Navbar letters color */
+[data-bs-theme=light] .navbar-brand {
+    --bs-navbar-brand-color: #385170 !important;
+}
+
+/* for login button */
+[data-bs-theme=light] .btn-primary {
+    --bs-btn-color: #385170 !important;
+    --bs-btn-hover-color: #385170 !important;
+    --bs-btn-active-color: #385170 !important;
+    --bs-btn-disabled-color: #385170 !important;
+    --bs-btn-bg: #9fd3c7 !important;
+    --bs-btn-border-color: #9fd3c7 !important;
+    --bs-btn-hover-bg: #9fd3c7 !important;
+    --bs-btn-hover-border-color: #9fd3c7 !important;
+    --bs-btn-active-bg: #9fd3c7 !important;
+    --bs-btn-active-border-color: #9fd3c7 !important;
+}
+
+/* for article buttons */
+[data-bs-theme=light] .btn-outline-secondary {
+    --bs-btn-color: #385170 !important;
+    --bs-btn-hover-color: #385170;
+    --bs-btn-active-color: #9fd3c7;
+    --bs-btn-disabled-color: #9fd3c7;
+    --bs-btn-bg: #9fd3c7;
+    --bs-btn-border-color: #385170;
+    --bs-btn-hover-bg: #385170;
+    --bs-btn-hover-border-color: #385170;
+    --bs-btn-active-bg: #385170;
+    --bs-btn-active-border-color: #385170;
+}
+
+/* article background color */
+[data-bs-theme=light] .bg-body-tertiary {
+    background-color: #ececec !important;
+}
+
+/* fix section color */
+[data-bs-theme=light] main {
+    background-color: #ececec !important;
+}
+
+[data-bs-theme=light] .navbar {
+    background-color: #9fd3c7 !important;
+}
+
+[data-bs-theme=light] .list-group-item {
+    border-bottom: 1px solid #385170;
+}
+
+.btn-bd-primary {
+    --bd-violet-bg: #712cf9;
+    --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bd-violet-bg);
+    --bs-btn-border-color: var(--bd-violet-bg);
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #6528e0;
+    --bs-btn-hover-border-color: #6528e0;
+    --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+    --bs-btn-active-bg: #5a23c8;
+    --bs-btn-active-border-color: #5a23c8;
+}
+
+.bd-mode-toggle {
+    z-index: 1500;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
