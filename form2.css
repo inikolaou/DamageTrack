@@ -8,6 +8,15 @@
         color: #ececec;
     }
 
+    nav{
+        background-color: #385170;
+        color: #ececec;
+    }
+
+    nav .nav-link{
+        color: #ececec;
+    }
+
     .container {
         margin-top: 30px;
         padding: 20px;
