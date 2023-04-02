@@ -220,7 +220,7 @@ passwordIcon.addEventListener("click", function () {
     }
     else if (passwordField.type === 'text') {
         passwordField.type = 'password';
-        passwordIcon.innerHTML = `<img src="eye-slash.svg">`;
+        passwordIcon.innerHTML = `<img src="../../images/eyeSlash.svg">`;
     }
 });
 
@@ -234,6 +234,6 @@ signUpPasswordIcon.addEventListener("click", function () {
     }
     else if (signUpPasswordField.type === 'text') {
         signUpPasswordField.type = 'password';
-        signUpPasswordIcon.innerHTML = `<img src="eye-slash.svg">`;
+        signUpPasswordIcon.innerHTML = `<img src="../../images/eyeSlash.svg">`;
     }
 });
