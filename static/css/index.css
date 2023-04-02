@@ -32,7 +32,7 @@ header {
 }
 
 section {
-    background-image: url('../homepage.png');
+    background-image: url('../../images/homepage.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
