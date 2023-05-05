@@ -1,0 +1,38 @@
+{
+  "name": "web_programming",
+  "version": "1.0.0",
+  "description": "DamageTrack - a reliable app that allows you to report infrastructure damage and monitor the repair progress with ease.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnnikolaou/DamageTrack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnnikolaou/DamageTrack/issues"
+  },
+  "homepage": "https://github.com/johnnikolaou/DamageTrack#readme",
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "*.json"
+    ]
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7"
+  }
+}
