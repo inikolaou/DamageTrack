@@ -7,7 +7,12 @@
                 <p class="lead text-body-secondary">A reliable website that allows you to report infrastructure
                     damage and monitor the repair progress with ease.</p>
                 <p>
+                    {{#unless session}}
                     <a href="/sign" class="btn btn-primary my-2">Login</a>
+                    {{/unless}}
+                    {{#if session}}
+                    <a href="/logout" class="btn btn-primary my-2">Logout</a>
+                    {{/if}}
                 </p>
             </div>
         </div>

@@ -1,8 +1,34 @@
 import express from 'express';
+import session from 'express-session';
 import { engine } from 'express-handlebars';
 import { router } from './routes.js';
+import mongoose from 'mongoose';
+
+mongoose.connect('mongodb://localhost:27017/testDB', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    console.log("Successfull connection");
+});
 
 const app = express();
+
+app.use(session({
+    secret: process.env.secret || "PynOjAuHetAuWawtinAytVunarAcjeBlybEshkEjVudyelwa",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        sameSite: true,
+        maxAge: 600000 // Time is in miliseconds
+    },
+    // store: new MemoryStore({ checkPeriod: 86400000 })
+}))
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
