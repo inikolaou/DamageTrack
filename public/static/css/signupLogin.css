@@ -11,16 +11,19 @@
     background-color: #ececec;
 }
 
-[data-bs-theme=light] #signUp, [data-bs-theme=light] #login {
+[data-bs-theme=light] #signUp,
+[data-bs-theme=light] #login {
     background-color: #9fd3c7 !important;
 }
 
-[data-bs-theme=light] #signUpBack:hover , [data-bs-theme=light] #signUpBack:focus{
+[data-bs-theme=light] #signUpBack:hover,
+[data-bs-theme=light] #signUpBack:focus {
     background-color: #9fd3c7 !important;
     color: #385170;
 }
 
-[data-bs-theme=light] #signUpNext:focus, [data-bs-theme=light] #loginButton:focus {
+[data-bs-theme=light] #signUpNext:focus,
+[data-bs-theme=light] #loginButton:focus {
     background-color: #142d4c;
     color: #ececec;
 }
@@ -53,11 +56,24 @@
     color: white;
 }
 
+[data-bs-theme=dark] .form-control {
+    background-color: white;
+}
+
+[data-bs-theme=dark] h4 {
+    color: inherit;
+}
+
+header {
+    margin-bottom: 5em;
+}
+
 .bi {
     fill: currentColor;
 }
 
-.form-control, .input-group-text {
+.form-control,
+.input-group-text {
     border: 0;
 }
 
@@ -71,32 +87,22 @@
     border-bottom-right-radius: 0;
 }
 
-body {
-    margin-bottom: 10px;
-    background-color: #142d4c;
+.form-floating:not(.form-control:disabled)::before {
+    display: none;
 }
 
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-    padding: 0;
-    justify-content: space-around;
-    background-color: #385170;
+body {
+    background-color: #142d4c;
 }
 
 .navbar-brand {
     --bs-navbar-brand-color: #ececec !important;
 }
 
-.navbar-brand:focus, .navbar-brand:hover {
+.navbar-brand:focus,
+.navbar-brand:hover {
     --bs-navbar-brand-hover-color: #ececec !important;
 }
-
-.navbar .container {
-    margin: 0;
-} 
 
 .btn-primary {
     background-color: #142d4c;
@@ -120,7 +126,8 @@ a:hover {
     background-color: white;
 }
 
-#login.container, #signUp.container {
+#login.container,
+#signUp.container {
     border-radius: 10px;
     background-color: #ececec;
     min-width: 320px;
@@ -133,7 +140,7 @@ a:hover {
 
 @media screen and (min-width: 500px) {
 
-    .container {
+    main .container {
         max-width: 500px;
     }
 
@@ -145,7 +152,7 @@ a:hover {
 
 @media screen and (min-width: 768px) {
 
-    .container {
+    main .container {
         max-width: 930px;
     }
 

@@ -5,16 +5,20 @@ import { User } from './model/model.js'
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.render('homepage', { session: req.session.mySessionName });
+    res.render('homepage', { 
+        session: req.session.mySessionName,
+        css: "index.css"
+    });
 });
 
 router.get('/sign', (req, res) => {
     if (req.session.mySessionName == undefined) {
-        console.log("not logged in");
-        res.render('signupLogin', { layout: "sign" });
+        res.render('signupLogin', { 
+            css: "signupLogin.css",
+            js: "signupLogin.js"
+        });
     }
     else {
-        console.log("is logged in");
         res.redirect('/');
     }
 });
@@ -34,6 +38,7 @@ router.post("/login", async (req, res) => {
         email: req.body['loginEmail'],
         password: req.body['loginPassword']
     }).limit(1);
+
     // User not authenticated
     if (user.length === 0) {
         res.redirect('/sign');
@@ -62,12 +67,6 @@ router.post("/signup", async (req, res) => {
 
     await newUser.save();
 
-    console.log(req.body['signUpEmail']);
-    console.log(req.body['signUpPassword']);
-    console.log(req.body['signUpFirstName']);
-    console.log(req.body['signUpLastName']);
-    console.log(req.body['signUpPhone']);
-    console.log(req.body['signUpCity']);
     res.redirect('/');
 });
 
