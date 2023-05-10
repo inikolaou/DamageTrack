@@ -1,12 +1,11 @@
+import 'dotenv/config'
 import express from 'express';
 import session from 'express-session';
 import { engine } from 'express-handlebars';
 import { router } from './routes.js';
 import mongoose from 'mongoose';
 
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/testDB";
-
-mongoose.connect(dbUrl, {
+mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -44,6 +43,7 @@ app.use((req, res) => {
     res.redirect('/');
 });
 
+const HOST = process.env.HOST || localhost;
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => console.log(`Η εφαρμογή ξεκίνησε στο http://127.0.0.1:${PORT}`));
+app.listen(PORT, () => console.log(`Η εφαρμογή ξεκίνησε στο http://${HOST}:${PORT}`));
