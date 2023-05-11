@@ -1,5 +1,5 @@
 <div class="container container-form">
-        <form class="needs-validation" novalidate>
+        <form action="/report" method="post" class="needs-validation" novalidate>
             <div class="row mt-3">
                 <div class="col-md-3 offset-md-2 col-5">
                     <div class="input-group">
@@ -58,13 +58,13 @@
                         <label for="customRange2" class="form-label px-5">Medium</label>
                         <label for="customRange2" class="form-label px-4">High</label>
                       </div>
-                      <input type="range" class="form-range" min="0" max="2" id="customRange2">
+                      <input type="range" class="form-range" name="urgency" min="0" max="2" id="customRange2">
                     </div>
                 </div>
 
                 <div class="mb-4 w-75">
                     <label for="photo" class="form-label">Photo</label>
-                    <input type="file" id="photo" name="photo" class="form-control" required>
+                    <input type="file" id="photo" name="image" class="form-control" required>
                     <div class="invalid-feedback show-warning">
                         Please provide a photo.
                     </div>
@@ -92,9 +92,9 @@
                 <label for="street" class="form-label">Address</label>
                 <div class="input-group mb-3 w-75"> 
                     <span class="input-group-text">Street</span>
-                    <input type="text" id="street" class="form-control" placeholder="Evrou" aria-label="Username" required>
+                    <input type="text" id="street" name="streetName" class="form-control" placeholder="Evrou" aria-label="Username" required>
                     <span class="input-group-text">Number</span>
-                    <input type="number" id="number" class="form-control" placeholder="51" pattern="^[0-9]*[1-9][0-9]*$" min="1" aria-label="Server" required>
+                    <input type="number" id="number" class="form-control" name="streetNumber" placeholder="51" pattern="^[0-9]*[1-9][0-9]*$" min="1" aria-label="Server" required>
                     <div class="invalid-feedback show-warning">
                         Please provide a valid address.
                     </div>
@@ -105,7 +105,7 @@
 
                 <div class="mb-4 w-75">
                     <label for="zip" class="form-label">ZIP</label>
-                    <input type="number" id="zip" name="zip" class="form-control" placeholder="15234" maxlength="20"  min="1" pattern="^[0-9]*[1-9][0-9]*$"  required>
+                    <input type="number" id="zip" name="zipCode" class="form-control" placeholder="15234" maxlength="20"  min="1" pattern="^[0-9]*[1-9][0-9]*$"  required>
                     <div class="invalid-feedback show-warning">
                         Please provide a valid zip code.
                     </div>
