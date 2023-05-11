@@ -1,7 +1,6 @@
 import express from 'express';
 import fs from 'fs/promises';
-import { User } from './model/model.js'
-
+import { Location, Category, Report, User } from './model/model.js';
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -74,44 +73,61 @@ router.get('/report', (req, res) => {
     res.render('reportForm', { layout: 'report' });
 });
 
-router.post('/report', (req, res) => {
-
-    const { category, description, urgency, photo, city, street, number, zip } = req.body;
-
-
-    const formData = {
-        category,
+router.post('/report', async (req, res) => {
+    try {
+      // Extract the necessary data from the request body
+      const { type, description, image, city, streetName, streetNumber, zipCode } = req.body;
+      const activeUser = req.user;
+      const urgencyMapping = ['Low', 'Medium', 'High'];
+      const urgencyValue = urgencyMapping[req.body.urgency];
+      // Find or create the location based on the provided data
+      let location = await Location.findOne({ city, streetName, streetNumber, zipCode });
+      if (!location) {
+        location = new Location({ city,  streetName, streetNumber, zipCode });
+        await location.save();
+      }
+  
+      // Find or create the category based on the provided type
+      let category = await Category.findOne({ title: type });
+      if (!category) {
+        category = new Category({ title: type });
+        await category.save();
+      }
+      
+      // Create a new instance of the Report model with the extracted data and the location and category objects
+      const report = new Report({
         description,
-        urgency,
-        photo,
-        location: {
-            city,
-            street,
-            number,
-            zip
-        }
-    };
+        user: activeUser,
+        location,
+        category,
+        status: 'Pending',
+        image,
+        urgency: urgencyValue
+      });
+  
+      // Save the report to the database
+      const savedReport = await report.save();
+  
+      res.status(201).json(savedReport); // Return the saved report as the response
+    } catch (err) {
+      res.status(500).json({ error: err.message }); // Handle any errors
+    }
+  });
+  
 
 
-    const jsonData = JSON.stringify(formData);
-    console.log("json Data");
-
-
-    fs.writeFile('formdata.json', jsonData, (err) => {
-        if (err) {
-            console.error(err);
-
-            res.render('error');
-        } else {
-            console.log("file created");
-            res.redirect('/thank-you');
-        }
-    });
-});
-
-
-router.get('/admin', (req, res) => {
-    res.render('adminDashboard', { layout: 'admin' });
-});
+  router.get('/admin', async (req, res) => {
+    try {
+      // Fetch all the reports from the database
+      const reports = await Report.find();
+      reports.forEach(report => {
+        console.log(report.urgency);
+      });
+      res.render('adminDashboard', { layout: 'admin', reports });
+    } catch (err) {
+      res.status(500).json({ error: err.message }); // Handle any errors
+    }
+  });
+  
 
 export { router };
