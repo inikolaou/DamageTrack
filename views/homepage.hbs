@@ -18,9 +18,14 @@
         </div>
     </section>
 
-    <div class="album py-5 bg-body-tertiary">
+    <div class="album py-3 bg-body-tertiary">
+        {{#if session}}
+        <div class="btn-toolbar my-4 d-flex justify-content-center" role="toolbar">
+            <button type="button" id="my-reports" class="btn btn-primary flex-grow-0 active">My reports</button>
+            <button type="button" id="all-reports" class="btn btn-primary flex-grow-0 ">All reports</button>
+        </div>
+        {{/if}}
         <div class="container">
-
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 {{#unless session}}
                 <div class="col">
@@ -132,7 +137,12 @@
                                         People are interested
                                         <span
                                             class="position-absolute top-0 start-0 number-position badge rounded-pill bg-info">
-                                            99+
+                                            {{#if likes}}
+                                            {{likes}}+
+                                            {{/if}}
+                                            {{#unless likes}}
+                                            0
+                                            {{/unless}}
                                             <span class="visually-hidden">unread messages</span>
                                         </span>
                                     </small>

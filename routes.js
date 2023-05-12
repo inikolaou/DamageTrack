@@ -96,8 +96,14 @@ router.post('/report', async (req, res) => {
       return res.sendStatus(400);
     }
 
-    // Move the uploaded image to our upload folder
-    await image.mv('public/images/' + image.name);
+    let path = 'public/images/' + image.name;
+
+    try {
+      await fs.access(path);
+    } catch (err) {
+      console.log(`${path} does not exist`);
+      await image.mv('public/images/' + image.name);
+    }
 
     // Find or create the location based on the provided data
     let location = await Location.findOne({ city, streetName, streetNumber, zipCode });
@@ -121,13 +127,14 @@ router.post('/report', async (req, res) => {
       category: newCategory,
       status: 'Pending',
       image: image.name,
-      urgency: urgencyValue
+      urgency: urgencyValue,
+      likes: 0
     });
 
     // Save the report to the database
     const savedReport = await report.save();
 
-    res.status(201).json(savedReport); // Return the saved report as the response
+    res.redirect('/')
   } catch (err) {
     res.status(500).json({ error: err.message }); // Handle any errors
   }

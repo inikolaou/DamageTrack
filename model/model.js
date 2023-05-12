@@ -33,6 +33,10 @@ const reportSchema = new mongoose.Schema({
       type: String,
       enum: ['Low', 'Medium', 'High'],
       required: true
+    },
+    likes: {
+      type: Number,
+      default: 0
     }
   }, { timestamps: true });
 

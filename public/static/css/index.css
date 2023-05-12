@@ -79,3 +79,18 @@ section {
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
+
+#my-reports {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    --bs-btn-active-bg: #9fd3c7;
+    --bs-btn-active-color: #385170;
+}
+
+#all-reports {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-left: 2px solid black;
+    --bs-btn-hover-bg: #9fd3c7;
+    --bs-btn-hover-color: #385170;
+}
