@@ -1,6 +1,7 @@
 import express from 'express';
 import fs from 'fs/promises';
 import { Location, Category, Report, User } from './model/model.js';
+
 const router = express.Router();
 
 router.get('/', (req, res) => {
