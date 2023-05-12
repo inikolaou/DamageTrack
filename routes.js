@@ -1,6 +1,7 @@
 import express from 'express';
 import fs from 'fs/promises';
 import { Location, Category, Report, User } from './model/model.js';
+
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -45,7 +46,7 @@ router.post("/login", async (req, res) => {
     else {
         if (req.session.mySessionName == undefined) {
             req.session.mySessionName = 'damageTrack-session';
-            console.log("session started:", req.session);
+            req.session.user_id = user[0]['_id'];
             res.redirect('/');
         }
         else {
