@@ -45,6 +45,7 @@ router.post("/login", async (req, res) => {
     else {
         if (req.session.mySessionName == undefined) {
             req.session.mySessionName = 'damageTrack-session';
+            req.session.user_id = user[0]['_id'];
             console.log("session started:", req.session);
             res.redirect('/');
         }
@@ -77,7 +78,9 @@ router.post('/report', async (req, res) => {
     try {
       // Extract the necessary data from the request body
       const { type, description, image, city, streetName, streetNumber, zipCode } = req.body;
-      const activeUser = req.user;
+      const activeUser = req.session.user_id
+      console.log(req.session.user_id)
+      console.log(activeUser)
       const urgencyMapping = ['Low', 'Medium', 'High'];
       const urgencyValue = urgencyMapping[req.body.urgency];
       // Find or create the location based on the provided data
@@ -119,7 +122,7 @@ router.post('/report', async (req, res) => {
   router.get('/admin', async (req, res) => {
     try {
       // Fetch all the reports from the database
-      const reports = await Report.find();
+      const reports = await Report.find().lean();
       reports.forEach(report => {
         console.log(report.urgency);
       });
