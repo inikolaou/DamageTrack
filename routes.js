@@ -4,10 +4,12 @@ import { Location, Category, Report, User } from './model/model.js';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+  const reports = await Report.find({user: req.session.user_id}).populate("category").populate("location").lean();
     res.render('homepage', { 
         session: req.session.mySessionName,
-        css: "index.css"
+        css: "index.css",
+        reports
     });
 });
 
@@ -47,7 +49,6 @@ router.post("/login", async (req, res) => {
         if (req.session.mySessionName == undefined) {
             req.session.mySessionName = 'damageTrack-session';
             req.session.user_id = user[0]['_id'];
-            console.log("session started:", req.session);
             res.redirect('/');
         }
         else {
@@ -78,7 +79,7 @@ router.get('/report', (req, res) => {
 router.post('/report', async (req, res) => {
     try {
       // Extract the necessary data from the request body
-      const { type, description, image, city, streetName, streetNumber, zipCode } = req.body;
+      const { category, description, image, city, streetName, streetNumber, zipCode } = req.body;
       const activeUser = req.session.user_id
       console.log(req.session.user_id)
       console.log(activeUser)
@@ -92,10 +93,10 @@ router.post('/report', async (req, res) => {
       }
   
       // Find or create the category based on the provided type
-      let category = await Category.findOne({ title: type });
-      if (!category) {
-        category = new Category({ title: type });
-        await category.save();
+      let newCategory = await Category.findOne({ name: category });
+      if (!newCategory) {
+        newCategory = new Category({ name: category });
+        await newCategory.save();
       }
       
       // Create a new instance of the Report model with the extracted data and the location and category objects
@@ -103,7 +104,7 @@ router.post('/report', async (req, res) => {
         description,
         user: activeUser,
         location,
-        category,
+        category: newCategory,
         status: 'Pending',
         image,
         urgency: urgencyValue
