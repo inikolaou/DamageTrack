@@ -5,6 +5,7 @@ import { engine } from 'express-handlebars';
 import { router } from './routes.js';
 import mongoose from 'mongoose';
 import moment from 'moment';
+import fileUpload from 'express-fileupload';
 
 mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
@@ -31,7 +32,16 @@ app.use(session({
         maxAge: 600000 // Time is in miliseconds
     },
     // store: new MemoryStore({ checkPeriod: 86400000 })
-}))
+}));
+
+app.use(
+    fileUpload({
+        limits: {
+            fileSize: 10000000,
+        },
+        abortOnLimit: true,
+    })
+);
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
