@@ -4,6 +4,7 @@ import session from 'express-session';
 import { engine } from 'express-handlebars';
 import { router } from './routes.js';
 import mongoose from 'mongoose';
+import moment from 'moment';
 
 mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
@@ -35,7 +36,17 @@ app.use(session({
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
-app.engine("hbs", engine({ extname: ".hbs" }));
+app.engine(
+    "hbs",
+    engine({
+        extname: '.hbs',
+        helpers: {
+            moment: function (date) {
+                return moment(date).fromNow(); // Returns the relative time from now
+            },
+        },
+    })
+);
 app.set("view engine", "hbs");
 
 app.use('/', router);
