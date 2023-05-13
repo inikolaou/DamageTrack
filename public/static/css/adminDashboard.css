@@ -70,6 +70,10 @@ body {
     opacity: 1;
 }
 
+.page-link{
+    color: #33cccc;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

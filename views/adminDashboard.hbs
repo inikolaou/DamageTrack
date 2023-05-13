@@ -1,237 +1,92 @@
 <div class="row mb-5 filters">
-        <div class="col-md-4 offset-md-2 col-12 mb-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Location..." aria-label="Search location"
-                    aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
-            </div>
+    <div class="col-md-4 offset-md-2 col-12 mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Location..." aria-label="Search location"
+                aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
         </div>
+    </div>
 
-        <div class="col-md-2 col-6 offset-md-2 mb-3 ">
-            <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="urgency-dropdown"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Urgency
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="urgency-dropdown">
-                    <li><a class="dropdown-item active" href="#">All</a></li>
-                    <li><a class="dropdown-item" href="#">High</a></li>
-                    <li><a class="dropdown-item" href="#">Medium</a></li>
-                    <li><a class="dropdown-item" href="#">Low</a></li>
-                </ul>
-            </div>
-        </div>
+    <div class="col-md-2 col-6 offset-md-2 mb-3">
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="urgency-dropdown"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Urgency
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="urgency-dropdown">
+                <li><a class="dropdown-item {{#unless urgency}}active{{/unless}}" href="/admin">All</a></li>
 
-        <div class="col-md-2 col-6  mb-3">
-            <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="status-dropdown"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Status
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="status-dropdown">
-                    <li><a class="dropdown-item active" href="#">All</a></li>
-                    <li><a class="dropdown-item" href="#">Pending</a></li>
-                    <li><a class="dropdown-item" href="#">Ongoing</a></li>
-                    <li><a class="dropdown-item" href="#">Finished</a></li>
-                </ul>
-            </div>
+                <li><a class="dropdown-item {{#ifEquals urgency "High"}}active{{/ifEquals}}"
+                        href="/admin?urgency=High">High</a></li>
+                <li><a class="dropdown-item {{#ifEquals urgency "Medium"}}active{{/ifEquals}}"
+                        href="/admin?urgency=Medium">Medium</a></li>
+                <li><a class="dropdown-item {{#ifEquals urgency "Low"}}active{{/ifEquals}}"
+                        href="/admin?urgency=Low">Low</a></li>
+            </ul>
         </div>
     </div>
 
 
-    <div class="container pt-5">
-
-        <div class="row row-cols-1 row-cols-md-3 g-4 g-md-5">
-            {{#each reports}}
-    
-                <div class="col">
-                    <div class="card high">
-                        <div class="card-header">{{urgency}}
-                            <div class="image-block">
-                                <img src="../images/fireDamage.jpg" class="card-img-bottom pt-4 " alt="...">
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">fireDamage</h5>
-                            <ul>
-                                <li>Patra</li>
-                                <li>Norman 94</li>
-                            </ul>
-                            <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">See More</a>
-                            <span class=" like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                    fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
-                                    <path
-                                        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
-                                </svg>10
-                            </span>
-                        </div>
-                        <div class="card-footer"></div>
-                    </div>
-                </div>
-            {{/each}}
-            {{!-- <div class="col">
-                <div class="card high">
-                    <div class="card-header">High Urgency
-                        <div class="image-block">
-                            <img src="../images/fireDamage.jpg" class="card-img-bottom pt-4 " alt="...">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Fire Damage</h5>
-                        <ul>
-                            <li>Patra</li>
-                            <li>Norman 94</li>
-                        </ul>
-                        <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">See More</a>
-                        <span class=" like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
-                                <path
-                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
-                            </svg>10
-                        </span>
-                    </div>
-                    <div class="card-footer"></div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card medium">
-                    <div class="card-header">Medium Urgency
-                        <div class="image-block">
-                            <img src="../images/fireDamage.jpg" class="card-img-bottom pt-4 " alt="...">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Fire Damage</h5>
-                        <ul>
-                            <li>Patra</li>
-                            <li>Norman 94</li>
-                        </ul>
-                        <a href="#" class="btn">See More</a>
-                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
-                                <path
-                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
-                            </svg>10
-                        </span>
-                    </div>
-                    <div class="card-footer"></div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card low">
-                    <div class="card-header">Low Urgency
-                        <div class="image-block">
-                            <img src="../images/fireDamage.jpg" class="card-img-bottom pt-4 " alt="...">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Fire Damage</h5>
-                        <ul>
-                            <li>Patra</li>
-                            <li>Norman 94</li>
-                        </ul>
-                        <a href="#" class="btn">See More</a>
-                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
-                                <path
-                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
-                            </svg>10
-                        </span>
-                    </div>
-                    <div class="card-footer"></div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card high">
-                    <div class="card-header">High Urgency
-                        <div class="image-block">
-                            <img src="../images/fireDamage.jpg" class="card-img-bottom pt-4 " alt="...">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Fire Damage</h5>
-                        <ul>
-                            <li>Patra</li>
-                            <li>Norman 94</li>
-                        </ul>
-                        <a href="#" class="btn">See More</a>
-                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
-                                <path
-                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
-                            </svg>10
-                        </span>
-                    </div>
-                    <div class="card-footer"></div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card medium">
-                    <div class="card-header">Medium Urgency
-                        <div class="image-block">
-                            <img src="../images/fireDamage.jpg" class="card-img-bottom pt-4 " alt="...">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Fire Damage</h5>
-                        <ul>
-                            <li>Patra</li>
-                            <li>Norman 94</li>
-                        </ul>
-                        <a href="#" class="btn">See More</a>
-                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
-                                <path
-                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
-                            </svg>10
-                        </span>
-                    </div>
-                    <div class="card-footer"></div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card low">
-                    <div class="card-header">Low Urgency
-                        <div class="image-block">
-                            <img src="../images/fireDamage.jpg" class="card-img-bottom pt-4" alt="...">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Fire Damage</h5>
-                        <ul>
-                            <li>Patra</li>
-                            <li>Norman 94</li>
-                        </ul>
-                        <a href="#" class="btn ">See More</a>
-                        <span class="like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
-                                <path
-                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
-                            </svg>10
-                        </span>
-                    </div>
-                    <div class="card-footer"></div>
-                </div>
-            </div> --}}
+    <div class="col-md-2 col-6 mb-3">
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="status-dropdown"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Status
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="status-dropdown">
+                <li><a class="dropdown-item {{#unless status}}active{{/unless}}" href="/admin">All</a></li>
+                <li><a class="dropdown-item {{#ifEquals status "Pending"}}active{{/ifEquals}}"
+                        href="/admin?status=Pending">Pending</a></li>
+                <li><a class="dropdown-item {{#ifEquals status "Ongoing"}}active{{/ifEquals}}"
+                        href="/admin?status=Ongoing">Ongoing</a></li>
+                <li><a class="dropdown-item {{#ifEquals status "Finished"}}active{{/ifEquals}}"
+                        href="/admin?status=Finished">Finished</a></li>
+            </ul>
         </div>
+    </div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
-                    <div class=" modal-content">
+</div>
+
+
+<div class="container pt-5 pb-5">
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 g-md-5">
+        {{#each reports}}
+
+        <div class="col">
+            <div class="card {{#ifEquals urgency " High"}}high{{else ifEquals urgency "Medium" }}medium{{else ifEquals
+                urgency "Low" }}low{{/ifEquals}}">
+                <div class="card-header">{{urgency}}
+                    <div class="image-block">
+                        <img src="images/{{image}}" class="card-img-bottom pt-4 " alt="...">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{category.name}}</h5>
+                    <ul>
+                        <li>{{location.city}}</li>
+                        <li>{{location.streetName}} {{location.streetNumber}} </li>
+                    </ul>
+                    <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal{{@index}}">See More</a>
+                    <span class=" like-tag mx-5"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                            fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
+                            <path
+                                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                        </svg>10
+                    </span>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{#each reports}}
+    <div class="modal fade" id="exampleModal{{@index}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class=" modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Fire Damage</h1>
 
@@ -239,21 +94,21 @@
                 </div>
                 <div class="modal-body">
                     <ul>
-                        <li><span>City</span> Patra</li>
-                        <li><span>Street</span> Norman 94</li>
-                        <li><span>ZIP Code</span> 15234</li>
-                        <li><span>Urgency Level</span> High</li>
+                        <li><span>City</span> {{location.city}}</li>
+                        <li><span>Street</span> {{location.streetName}} {{location.streetNumber}}</li>
+                        <li><span>ZIP Code</span> {{location.zipCode}}</li>
+                        <li><span>Urgency Level</span> {{urgency}}</li>
                         <li><span class="like-tag"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                     fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
                                         d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
                                     <path
                                         d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
-                                </svg>10
+                                </svg>{{likes}}
                             </span></li>
                     </ul>
-                    <p>Here goes the description of the damage</p>
-                    <img src="../images/fireDamage.jpg" class="card-img-bottom pt-4 " alt="...">
+                    <p>{{description}}</p>
+                    <img src="images/{{image}}" class="card-img-bottom pt-4 " alt="...">
                     <div class="form">
                         <div class="mt-4 w-50">
                             <label for="status" class="form-label mb-1">Status</label>
@@ -272,5 +127,28 @@
             </div>
         </div>
     </div>
+    {{/each}}
+</div>
 
-    </div>
+<nav aria-label="Report pagination ">
+    <ul class="pagination justify-content-center mt-5">
+        {{#gt currentPage 1}}
+        <li class="page-item">
+            <a class="page-link" href="/admin?page={{subtract currentPage 1}}&limit={{limit}}">Previous</a>
+        </li>
+        {{/gt}}
+
+        {{#range 1 totalPages}}
+        <li class="page-item {{#ifEquals this currentPage}}active{{/ifEquals}}">
+            <a class="page-link" href="/admin?page={{this}}&limit={{limit}}">{{this}}</a>
+        </li>
+        {{/range}}
+
+        {{#lt currentPage totalPages}}
+        <li class="page-item">
+            <a class="page-link" href="/admin?page={{add currentPage 1}}&limit={{limit}}">Next</a>
+        </li>
+        {{/lt}}
+    </ul>
+</nav>
+

@@ -6,6 +6,7 @@ import { router } from './routes.js';
 import mongoose from 'mongoose';
 import moment from 'moment';
 import fileUpload from 'express-fileupload';
+import Handlebars from 'handlebars';
 
 mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
@@ -63,6 +64,34 @@ app.use('/', router);
 
 app.use((req, res) => {
     res.redirect('/');
+});
+
+Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
+Handlebars.registerHelper('gt', function(arg1, arg2, options) {
+    return (arg1 > arg2) ? options.fn(this) : options.inverse(this);
+});
+
+Handlebars.registerHelper('lt', function(arg1, arg2, options) {
+    return (arg1 < arg2) ? options.fn(this) : options.inverse(this);
+});
+
+Handlebars.registerHelper('add', function(arg1, arg2) {
+    return arg1 + arg2;
+});
+
+Handlebars.registerHelper('subtract', function(arg1, arg2) {
+    return arg1 - arg2;
+});
+
+Handlebars.registerHelper('range', function(start, end, options) {
+    var result = '';
+    for (var i = start; i <= end; i++) {
+        result += options.fn(i);
+    }
+    return result;
 });
 
 const HOST = process.env.HOST || localhost;

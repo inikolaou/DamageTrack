@@ -143,17 +143,38 @@ router.post('/report', async (req, res) => {
 
 
 router.get('/admin', async (req, res) => {
-  try {
-    // Fetch all the reports from the database
-    const reports = await Report.find().lean();
-    reports.forEach(report => {
-      console.log(report.urgency);
-    });
-    res.render('adminDashboard', { layout: 'admin', reports });
-  } catch (err) {
-    res.status(500).json({ error: err.message }); // Handle any errors
-  }
+    try {
+        const page = parseInt(req.query.page) || 1; 
+        const limit = parseInt(req.query.limit) || 3; 
+        const totalReports = await Report.countDocuments(); 
+        const totalPages = Math.ceil(totalReports / limit); 
+        const skip = (page - 1) * limit; 
+
+        const { urgency, status } = req.query;
+        const query = {};
+
+        if (urgency && urgency !== 'all') {
+            query.urgency = urgency;
+        }
+
+        if (status && status !== 'all') {
+            query.status = status;
+        }
+
+        const reports = await Report.find(query)
+            .populate('category')
+            .populate('location')
+            .skip(skip)
+            .limit(limit)
+            .lean();
+
+        res.render('adminDashboard', { layout: 'admin', reports, totalPages, currentPage: page });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
+
+
 
 
 export { router };
