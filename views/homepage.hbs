@@ -21,8 +21,14 @@
     <div class="album py-3 bg-body-tertiary">
         {{#if session}}
         <div class="btn-toolbar my-4 d-flex justify-content-center" role="toolbar">
+            {{#if user}}
             <button type="button" id="my-reports" class="btn btn-primary flex-grow-0 active">My reports</button>
-            <button type="button" id="all-reports" class="btn btn-primary flex-grow-0 ">All reports</button>
+            <button type="button" id="all-reports" class="btn btn-primary flex-grow-0 inactive">All reports</button>
+            {{/if}}
+            {{#if all}}
+            <button type="button" id="my-reports" class="btn btn-primary flex-grow-0 inactive">My reports</button>
+            <button type="button" id="all-reports" class="btn btn-primary flex-grow-0 active">All reports</button>
+            {{/if}}
         </div>
         {{/if}}
         <div class="container">
@@ -157,5 +163,28 @@
             </div>
         </div>
     </div>
+    {{#if session}}
+    <nav>
+        <ul class="pagination justify-content-center mt-5">
+            {{#gt currentPage 1}}
+            <li class="page-item">
+                <a class="page-link" id="previous" href="?page={{subtract currentPage 1}}&limit={{limit}}">Previous</a>
+            </li>
+            {{/gt}}
+
+            {{#range 1 totalPages}}
+            <li class="page-item {{#ifEquals this currentPage}}active{{/ifEquals}}">
+                <a class="page-link pages" href="?page={{this}}&limit={{limit}}">{{this}}</a>
+            </li>
+            {{/range}}
+
+            {{#lt currentPage totalPages}}
+            <li class="page-item">
+                <a class="page-link" id="next" href="?page={{add currentPage 1}}&limit={{limit}}">Next</a>
+            </li>
+            {{/lt}}
+        </ul>
+    </nav>
+    {{/if}}
 
 </main>
