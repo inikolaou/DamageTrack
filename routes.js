@@ -5,60 +5,70 @@ import { Location, Category, Report, User } from './model/model.js';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 3;
-  let totalReports;
-  let totalPages;
-  let merged_query;
-  const skip = (page - 1) * limit;
+  try {
+    if (req.session.isAdmin == undefined) {
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 3;
+      let totalReports;
+      let totalPages;
+      let merged_query;
+      const skip = (page - 1) * limit;
 
-  const { text, urgency, status } = req.query;
-  const query = {};
+      const { text, urgency, status } = req.query;
+      const query = {};
 
-  if (urgency && urgency !== 'all') {
-    query.urgency = urgency;
-  }
+      if (urgency && urgency !== 'all') {
+        query.urgency = urgency;
+      }
 
-  if (status && status !== 'all') {
-    query.status = status;
-  }
+      if (status && status !== 'all') {
+        query.status = status;
+      }
 
-  if (text) {
-    query.description = { $regex: text, $options: "i" };
-  }
+      if (text) {
+        query.description = { $regex: text, $options: "i" };
+      }
 
-  let reports;
-  let all;
-  let user;
-  if (req.query['reports'] === 'all') {
-    totalReports = await Report.countDocuments(query);
-    totalPages = Math.ceil(totalReports / limit);
-    reports = await Report.find(query).populate("category").populate("location")
-      .skip(skip)
-      .limit(limit)
-      .lean();
-    all = true;
+      let reports;
+      let all;
+      let user;
+      if (req.query['reports'] === 'all') {
+        totalReports = await Report.countDocuments(query);
+        totalPages = Math.ceil(totalReports / limit);
+        reports = await Report.find(query).populate("category").populate("location")
+          .skip(skip)
+          .limit(limit)
+          .lean();
+        all = true;
+      }
+      else {
+        merged_query = Object.assign({}, query, { user: req.session.user_id })
+        totalReports = await Report.find(merged_query).countDocuments();
+        totalPages = Math.ceil(totalReports / limit);
+        reports = await Report.find(merged_query).populate("category").populate("location")
+          .skip(skip)
+          .limit(limit)
+          .lean();
+        user = true;
+      }
+      return res.render('homepage', {
+        session: req.session.mySessionName,
+        css: "index.css",
+        js: "index.js",
+        user,
+        all,
+        reports,
+        totalPages,
+        currentPage: page
+      });
+    }
+    else {
+      return res.redirect('/admin');
+    }
   }
-  else {
-    merged_query = Object.assign({}, query, { user: req.session.user_id })
-    totalReports = await Report.find(merged_query).countDocuments();
-    totalPages = Math.ceil(totalReports / limit);
-    reports = await Report.find(merged_query).populate("category").populate("location")
-      .skip(skip)
-      .limit(limit)
-      .lean();
-    user = true;
+  catch (err) {
+    console.log(err);
   }
-  res.render('homepage', {
-    session: req.session.mySessionName,
-    css: "index.css",
-    js: "index.js",
-    user,
-    all,
-    reports,
-    totalPages,
-    currentPage: page
-  });
 });
 
 router.get('/sign', (req, res) => {
@@ -87,7 +97,7 @@ router.post("/login", async (req, res) => {
   let user = await User.find({
     email: req.body['loginEmail'],
     password: req.body['loginPassword']
-  }).limit(1);
+  }).select('+isAdmin').limit(1);
 
   // User not authenticated
   if (user.length === 0) {
@@ -97,6 +107,9 @@ router.post("/login", async (req, res) => {
     if (req.session.mySessionName == undefined) {
       req.session.mySessionName = 'damageTrack-session';
       req.session.user_id = user[0]['_id'];
+      if (user[0]['isAdmin']) {
+        req.session.isAdmin = true;
+      }
       res.redirect('/');
     }
     else {
@@ -121,7 +134,12 @@ router.post("/signup", async (req, res) => {
 });
 
 router.get('/report', (req, res) => {
-  res.render('reportForm', { layout: 'report' });
+  if (req.session.isAdmin == undefined) {
+    res.render('reportForm', { layout: 'report' });
+  }
+  else {
+    res.redirect('/admin');
+  }
 });
 
 router.post('/report', async (req, res) => {
@@ -188,41 +206,51 @@ router.post('/report', async (req, res) => {
   }
 });
 
-
-
 router.get('/admin', async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 3;
-    const totalReports = await Report.countDocuments();
-    const totalPages = Math.ceil(totalReports / limit);
-    const skip = (page - 1) * limit;
+    let user = await User.findOne({
+      _id: req.session.user_id
+    }).select('+isAdmin').exec();
 
-    const { urgency, status } = req.query;
-    const query = {};
-
-    if (urgency && urgency !== 'all') {
-      query.urgency = urgency;
+    if (user === null) {
+      res.redirect('/');
     }
+    else {
+      if (req.session.isAdmin == undefined) {
+        res.redirect('/');
+      }
+      else {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 3;
+        const totalReports = await Report.countDocuments();
+        const totalPages = Math.ceil(totalReports / limit);
+        const skip = (page - 1) * limit;
 
-    if (status && status !== 'all') {
-      query.status = status;
+        const { urgency, status } = req.query;
+        const query = {};
+
+        if (urgency && urgency !== 'all') {
+          query.urgency = urgency;
+        }
+
+        if (status && status !== 'all') {
+          query.status = status;
+        }
+
+        const reports = await Report.find(query)
+          .populate('category')
+          .populate('location')
+          .skip(skip)
+          .limit(limit)
+          .lean();
+
+        res.render('adminDashboard', { layout: 'admin', reports, totalPages, currentPage: page });
+      }
     }
-
-    const reports = await Report.find(query)
-      .populate('category')
-      .populate('location')
-      .skip(skip)
-      .limit(limit)
-      .lean();
-
-    res.render('adminDashboard', { layout: 'admin', reports, totalPages, currentPage: page });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  }
+  catch (err) {
+    console.log(err);
   }
 });
-
-
-
 
 export { router };
