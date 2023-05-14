@@ -30,6 +30,55 @@
             <button type="button" id="all-reports" class="btn btn-primary flex-grow-0 active">All reports</button>
             {{/if}}
         </div>
+
+        <div class="row mb-5 filters">
+            <div class="col-md-4 offset-md-2 col-12 mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchText" placeholder="Location..." aria-label="Search location"
+                        aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button" id="search">Search</button>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-6 offset-md-2 mb-3">
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="urgency-dropdown"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Urgency
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="urgency-dropdown">
+                        <li><a class="dropdown-item {{#unless urgency}}active{{/unless}}" href="/?">All</a></li>
+
+                        <li><a class="dropdown-item {{#ifEquals urgency " High"}}active{{/ifEquals}}"
+                                href="/?urgency=High">High</a></li>
+                        <li><a class="dropdown-item {{#ifEquals urgency " Medium"}}active{{/ifEquals}}"
+                                href="/?urgency=Medium">Medium</a></li>
+                        <li><a class="dropdown-item {{#ifEquals urgency " Low"}}active{{/ifEquals}}"
+                                href="/?urgency=Low">Low</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-md-2 col-6 mb-3">
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="status-dropdown"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Status
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="status-dropdown">
+                        <li><a class="dropdown-item {{#unless status}}active{{/unless}}" href="/?">All</a></li>
+                        <li><a class="dropdown-item {{#ifEquals status " Pending"}}active{{/ifEquals}}"
+                                href="/?status=Pending">Pending</a></li>
+                        <li><a class="dropdown-item {{#ifEquals status " Ongoing"}}active{{/ifEquals}}"
+                                href="/?status=Ongoing">Ongoing</a></li>
+                        <li><a class="dropdown-item {{#ifEquals status " Finished"}}active{{/ifEquals}}"
+                                href="/?status=Finished">Finished</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
         {{/if}}
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -155,6 +204,7 @@
                                 </div>
                                 <small class="text-body-secondary">{{moment createdAt}}</small>
                             </div>
+                            <p class="card-subtitle mt-2 text-body-secondary">Status: {{status}}</p>
                         </div>
                     </div>
                 </div>

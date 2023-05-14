@@ -7,21 +7,43 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 3;
-  const totalReports = await Report.countDocuments();
-  const totalPages = Math.ceil(totalReports / limit);
+  let totalReports;
+  let totalPages;
+  let merged_query;
   const skip = (page - 1) * limit;
+
+  const { text, urgency, status } = req.query;
+  const query = {};
+
+  if (urgency && urgency !== 'all') {
+    query.urgency = urgency;
+  }
+
+  if (status && status !== 'all') {
+    query.status = status;
+  }
+
+  if (text) {
+    query.description = { $regex: text, $options: "i" };
+  }
+
   let reports;
   let all;
   let user;
   if (req.query['reports'] === 'all') {
-    reports = await Report.find().populate("category").populate("location")
+    totalReports = await Report.countDocuments(query);
+    totalPages = Math.ceil(totalReports / limit);
+    reports = await Report.find(query).populate("category").populate("location")
       .skip(skip)
       .limit(limit)
       .lean();
     all = true;
   }
   else {
-    reports = await Report.find({ user: req.session.user_id }).populate("category").populate("location")
+    merged_query = Object.assign({}, query, { user: req.session.user_id })
+    totalReports = await Report.find(merged_query).countDocuments();
+    totalPages = Math.ceil(totalReports / limit);
+    reports = await Report.find(merged_query).populate("category").populate("location")
       .skip(skip)
       .limit(limit)
       .lean();
