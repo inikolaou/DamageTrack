@@ -30,16 +30,26 @@ router.get('/', async (req, res) => {
       }
 
       let reports;
-      let all;
-      let user;
       if (req.query['reports'] === 'all') {
+        query.user = { $ne: req.session.user_id }
         totalReports = await Report.countDocuments(query);
         totalPages = Math.ceil(totalReports / limit);
         reports = await Report.find(query).populate("category").populate("location")
           .skip(skip)
           .limit(limit)
           .lean();
-        all = true;
+
+        res.locals.all = true;
+
+        return res.render('homepage', {
+          session: req.session.mySessionName,
+          user_id: req.session.user_id,
+          css: "index.css",
+          js: "index.js",
+          reports,
+          totalPages,
+          currentPage: page
+        });
       }
       else {
         merged_query = Object.assign({}, query, { user: req.session.user_id })
@@ -49,18 +59,18 @@ router.get('/', async (req, res) => {
           .skip(skip)
           .limit(limit)
           .lean();
-        user = true;
+
+        return res.render('homepage', {
+          session: req.session.mySessionName,
+          css: "index.css",
+          js: "index.js",
+          user_id: req.session.user_id,
+          user: true,
+          reports,
+          totalPages,
+          currentPage: page
+        });
       }
-      return res.render('homepage', {
-        session: req.session.mySessionName,
-        css: "index.css",
-        js: "index.js",
-        user,
-        all,
-        reports,
-        totalPages,
-        currentPage: page
-      });
     }
     else {
       return res.redirect('/admin');
@@ -70,6 +80,36 @@ router.get('/', async (req, res) => {
     console.log(err);
   }
 });
+
+// Route for updating likes
+router.get('/like/:reportId', async (req, res) => {
+  const reportId = req.params.reportId;
+  const userId = req.session.user_id;
+
+  try {
+    // Find the post with the given ID
+    const report = await Report.findById(reportId);
+
+    // Check if the user ID is already in the likes array
+    const userIndex = report.likes.indexOf(userId);
+    if (userIndex !== -1) {
+      // User has already liked the post, so remove the like
+      report.likes.splice(userIndex, 1);
+    } else {
+      // User has not liked the post, so add the like
+      report.likes.push(userId);
+    }
+
+    // Save the updated post
+    await report.save();
+
+    res.redirect('/');
+  } catch (err) {
+    console.error('Error updating likes', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 router.get('/sign', (req, res) => {
   if (req.session.mySessionName == undefined) {
@@ -194,7 +234,7 @@ router.post('/report', async (req, res) => {
       status: 'Pending',
       image: image.name,
       urgency: urgencyValue,
-      likes: 0
+      likes: []
     });
 
     // Save the report to the database

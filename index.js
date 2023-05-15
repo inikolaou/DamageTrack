@@ -62,10 +62,6 @@ app.set("view engine", "hbs");
 
 app.use('/', router);
 
-app.use((req, res) => {
-    res.redirect('/');
-});
-
 Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
@@ -92,6 +88,15 @@ Handlebars.registerHelper('range', function(start, end, options) {
         result += options.fn(i);
     }
     return result;
+});
+
+Handlebars.registerHelper('likesInclude', function (likes, userId, options) {
+    for (let i = 0; i < likes.length; i++) {
+        if (likes[i].toString() === userId) {
+            return true
+        }
+    }
+    return false;
 });
 
 const HOST = process.env.HOST || localhost;

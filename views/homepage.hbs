@@ -34,8 +34,8 @@
         <div class="row mb-5 filters">
             <div class="col-md-4 offset-md-2 col-12 mb-3">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="searchText" placeholder="Location..." aria-label="Search location"
-                        aria-describedby="button-addon2">
+                    <input type="text" class="form-control" id="searchText" placeholder="Location..."
+                        aria-label="Search location" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary" type="button" id="search">Search</button>
                 </div>
             </div>
@@ -189,17 +189,24 @@
                             <div class="d-flex justify-content-between align-items-center mt-2">
                                 <div>
                                     <small class="position-relative">
+                                        {{#if likes}}
+                                        {{likes.length}}
+                                        {{/if}}
+                                        {{#unless likes}}
+                                        0
+                                        {{/unless}}
                                         People are interested
-                                        <span
-                                            class="position-absolute top-0 start-0 number-position badge rounded-pill bg-info">
-                                            {{#if likes}}
-                                            {{likes}}+
+                                        {{#if @root.all}}
+                                        <a href="like/{{_id}}"
+                                            class="position-absolute top-0 start-0 number-position badge rounded-pill bg-info link-underline link-underline-opacity-0">
+                                            {{#if (likesInclude likes @root.user_id)}}
+                                            I am not interested
+                                            {{else}}
+                                            I am interested
                                             {{/if}}
-                                            {{#unless likes}}
-                                            0
-                                            {{/unless}}
                                             <span class="visually-hidden">unread messages</span>
-                                        </span>
+                                        </a>
+                                        {{/if}}
                                     </small>
                                 </div>
                                 <small class="text-body-secondary">{{moment createdAt}}</small>

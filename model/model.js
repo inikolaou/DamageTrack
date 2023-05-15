@@ -34,10 +34,10 @@ const reportSchema = new mongoose.Schema({
     enum: ['Low', 'Medium', 'High'],
     required: true
   },
-  likes: {
-    type: Number,
-    default: 0
-  }
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 }, { timestamps: true });
 
 const Report = mongoose.model('Report', reportSchema);
