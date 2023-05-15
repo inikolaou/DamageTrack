@@ -38,11 +38,6 @@
     background-color: #385170 !important;
 }
 
-[data-bs-theme=dark] #bd-theme {
-    background-color: #385170 !important;
-    border-color: #385170 !important;
-}
-
 /* for login button */
 [data-bs-theme=dark] .btn-primary {
     --bs-btn-color: #ececec;
@@ -67,7 +62,7 @@
     background-color: #142d4c !important;
 }
 
-[data-bs-theme=light] {
+[data-bs-theme=light], [data-bs-theme=auto] {
     --bs-secondary-color: #385170;
     --bs-heading-color: #385170;
     --bs-body-color: #385170;
@@ -76,51 +71,46 @@
     --bs-btn-hover-bg: #385170;
 }
 
-[data-bs-theme=light] .card {
+[data-bs-theme=light] .card, [data-bs-theme=auto] .card {
     --bs-card-bg: #9fd3c7;
 }
 
-[data-bs-theme=light] footer {
+[data-bs-theme=light] footer, [data-bs-theme=auto] footer {
     background-color: #9fd3c7;
 }
 
-[data-bs-theme=light] .list-group-item {
+[data-bs-theme=light] .list-group-item, [data-bs-theme=auto] .list-group-item {
     background-color: #9fd3c7;
 }
 
 /* DamageTrack title */
-[data-bs-theme=light] .fw-light {
+[data-bs-theme=light] .fw-light, [data-bs-theme=auto] .fw-light {
     --bs-heading-color: #ececec;
 }
 
 /* DamageTrack description */
-[data-bs-theme=light] .lead {
+[data-bs-theme=light] .lead, [data-bs-theme=auto] .lead {
     --bs-secondary-color: #ececec;
 }
 
-[data-bs-theme=light] #bd-theme {
-    background-color: #9fd3c7 !important;
-    border-color: #9fd3c7 !important;
-}
-
 /* like colors */
-[data-bs-theme=light] .bg-info {
+[data-bs-theme=light] .bg-info, [data-bs-theme=auto] .bg-info {
     color: #ececec !important;
     background-color: #385170 !important;
 }
 
 /* Github link color */
-[data-bs-theme=light] .text-white {
+[data-bs-theme=light] .text-white, [data-bs-theme=auto] .text-white {
     color: #385170 !important;
 }
 
 /* Navbar letters color */
-[data-bs-theme=light] .navbar-brand {
+[data-bs-theme=light] .navbar-brand, [data-bs-theme=auto] .navbar-brand {
     --bs-navbar-brand-color: #385170 !important;
 }
 
 /* for login button */
-[data-bs-theme=light] .btn-primary {
+[data-bs-theme=light] .btn-primary, [data-bs-theme=auto] .btn-primary {
     --bs-btn-color: #385170 !important;
     --bs-btn-hover-color: #385170 !important;
     --bs-btn-active-color: #385170 !important;
@@ -134,7 +124,7 @@
 }
 
 /* for article buttons */
-[data-bs-theme=light] .btn-outline-secondary {
+[data-bs-theme=light] .btn-outline-secondary, [data-bs-theme=auto] .btn-outline-secondary {
     --bs-btn-color: #385170 !important;
     --bs-btn-hover-color: #385170;
     --bs-btn-active-color: #9fd3c7;
@@ -148,20 +138,20 @@
 }
 
 /* article background color */
-[data-bs-theme=light] .bg-body-tertiary {
+[data-bs-theme=light] .bg-body-tertiary, [data-bs-theme=auto] .bg-body-tertiary {
     background-color: #ececec !important;
 }
 
 /* fix section color */
-[data-bs-theme=light] main {
+[data-bs-theme=light] main, [data-bs-theme=auto] main {
     background-color: #ececec !important;
 }
 
-[data-bs-theme=light] .navbar {
+[data-bs-theme=light] .navbar, [data-bs-theme=auto] .navbar {
     background-color: #9fd3c7 !important;
 }
 
-[data-bs-theme=light] .list-group-item {
+[data-bs-theme=light] .list-group-item, [data-bs-theme=auto] .list-group-item {
     border-bottom: 1px solid #385170;
 }
 

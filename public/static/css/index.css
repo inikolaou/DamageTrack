@@ -83,17 +83,47 @@ section {
 #my-reports {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
-
+    border-right: 0;
 }
 
-.active {
+[data-bs-theme=dark] .active {
     --bs-btn-active-bg: #9fd3c7 !important;
     --bs-btn-active-color: #385170 !important;
 }
 
-.inactive {
+[data-bs-theme=light] .btn.active, [data-bs-theme=auto] .btn.active {
+    --bs-btn-active-bg: #385170 !important;
+    --bs-btn-active-color: #9fd3c7 !important;
+}
+
+[data-bs-theme=dark] .inactive {
     --bs-btn-hover-bg: #9fd3c7 !important;
     --bs-btn-hover-color: #385170 !important;
+}
+
+[data-bs-theme=light] .btn.inactive, [data-bs-theme=auto] .btn.inactive {
+    --bs-btn-hover-bg: #385170 !important;
+    --bs-btn-hover-color: #9fd3c7 !important;
+}
+
+[data-bs-theme=dark] .page-link.pages {
+    background-color: #385170;
+    color: #9fd3c7;
+}
+
+[data-bs-theme=dark] .page-link.pages:hover {
+    background-color: #9fd3c7;
+    color: #385170;
+}
+
+[data-bs-theme=light] .page-link.pages, [data-bs-theme=auto] .page-link.pages {
+    background-color: #9fd3c7;
+    color: #385170;
+}
+
+[data-bs-theme=light] .page-link.pages:hover, [data-bs-theme=auto] .page-link.pages:hover {
+    background-color: #385170;
+    color: #9fd3c7;
 }
 
 #all-reports {
