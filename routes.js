@@ -1,5 +1,6 @@
 import express from 'express';
 import fs from 'fs/promises';
+import bcrypt from "bcrypt";
 import { Location, Category, Report, User } from './model/model.js';
 
 const router = express.Router();
@@ -135,8 +136,7 @@ router.get("/logout", (req, res) => {
 
 router.post("/login", async (req, res) => {
   let user = await User.find({
-    email: req.body['loginEmail'],
-    password: req.body['loginPassword']
+    email: req.body['loginEmail']
   }).select('+isAdmin').limit(1);
 
   // User not authenticated
@@ -144,24 +144,31 @@ router.post("/login", async (req, res) => {
     res.redirect('/sign');
   }
   else {
-    if (req.session.mySessionName == undefined) {
-      req.session.mySessionName = 'damageTrack-session';
-      req.session.user_id = user[0]['_id'];
-      if (user[0]['isAdmin']) {
-        req.session.isAdmin = true;
+    const match = await bcrypt.compare(req.body['loginPassword'], user[0]['password']);
+    if (match) {
+      if (req.session.mySessionName == undefined) {
+        req.session.mySessionName = 'damageTrack-session';
+        req.session.user_id = user[0]['_id'];
+        if (user[0]['isAdmin']) {
+          req.session.isAdmin = true;
+        }
+        res.redirect('/');
       }
-      res.redirect('/');
+      else {
+        res.redirect('/');
+      }
     }
     else {
-      res.redirect('/');
+      res.redirect("/");
     }
   }
-});
+}
+);
 
 router.post("/signup", async (req, res) => {
   let newUser = new User({
     email: req.body['signUpEmail'],
-    password: req.body['signUpPassword'],
+    password: bcrypt.hashSync(req.body['signUpPassword'], 10),
     firstName: req.body['signUpFirstName'],
     lastName: req.body['signUpLastName'],
     phone: req.body['signUpPhone'],
