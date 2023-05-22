@@ -203,3 +203,8 @@ a:hover {
 #signUp {
     display: none;
 }
+
+#loginLink, #signUpLink {
+    cursor: pointer;
+    text-decoration: underline;
+}

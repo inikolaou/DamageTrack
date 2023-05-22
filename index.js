@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import express from 'express';
 import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import { engine } from 'express-handlebars';
 import { router } from './routes.js';
 import mongoose from 'mongoose';
@@ -32,7 +33,7 @@ app.use(session({
         sameSite: true,
         maxAge: 600000 // Time is in miliseconds
     },
-    // store: new MemoryStore({ checkPeriod: 86400000 })
+    store: MongoStore.create({ mongoUrl: process.env.DB_URL })
 }));
 
 app.use(
@@ -62,27 +63,27 @@ app.set("view engine", "hbs");
 
 app.use('/', router);
 
-Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
-Handlebars.registerHelper('gt', function(arg1, arg2, options) {
+Handlebars.registerHelper('gt', function (arg1, arg2, options) {
     return (arg1 > arg2) ? options.fn(this) : options.inverse(this);
 });
 
-Handlebars.registerHelper('lt', function(arg1, arg2, options) {
+Handlebars.registerHelper('lt', function (arg1, arg2, options) {
     return (arg1 < arg2) ? options.fn(this) : options.inverse(this);
 });
 
-Handlebars.registerHelper('add', function(arg1, arg2) {
+Handlebars.registerHelper('add', function (arg1, arg2) {
     return arg1 + arg2;
 });
 
-Handlebars.registerHelper('subtract', function(arg1, arg2) {
+Handlebars.registerHelper('subtract', function (arg1, arg2) {
     return arg1 - arg2;
 });
 
-Handlebars.registerHelper('range', function(start, end, options) {
+Handlebars.registerHelper('range', function (start, end, options) {
     var result = '';
     for (var i = start; i <= end; i++) {
         result += options.fn(i);
