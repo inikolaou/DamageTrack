@@ -1,6 +1,7 @@
 import express from 'express';
 import fs from 'fs/promises';
 import { Location, Category, Report, User } from './model/model.js';
+import { transporter, mailOptions } from './email.js';
 
 const router = express.Router();
 
@@ -35,12 +36,13 @@ router.get('/', async (req, res) => {
         totalReports = await Report.countDocuments(query);
         totalPages = Math.ceil(totalReports / limit);
         reports = await Report.find(query).populate("category").populate("location")
+          .sort({ likes: -1 })
           .skip(skip)
           .limit(limit)
           .lean();
 
         res.locals.all = true;
-
+        reports.sort((a, b) => b.likes.length - a.likes.length);
         return res.render('homepage', {
           session: req.session.mySessionName,
           user_id: req.session.user_id,
@@ -158,20 +160,46 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// router.post("/signup", async (req, res) => {
+//   let newUser = new User({
+//     email: req.body['signUpEmail'],
+//     password: req.body['signUpPassword'],
+//     firstName: req.body['signUpFirstName'],
+//     lastName: req.body['signUpLastName'],
+//     phone: req.body['signUpPhone'],
+//     city: req.body['signUpCity']
+//   });
+
+//   await newUser.save();
+
+//   res.redirect('/');
+// });
+
 router.post("/signup", async (req, res) => {
-  let newUser = new User({
-    email: req.body['signUpEmail'],
-    password: req.body['signUpPassword'],
-    firstName: req.body['signUpFirstName'],
-    lastName: req.body['signUpLastName'],
-    phone: req.body['signUpPhone'],
-    city: req.body['signUpCity']
+  const { signUpEmail, signUpPassword, signUpFirstName, signUpLastName, signUpPhone, signUpCity } = req.body;
+
+  // Check if the email already exists in the database
+  const existingUser = await User.findOne({ email: signUpEmail });
+
+  if (existingUser) {
+    return res.render('signupLogin', { js : 'user_exists.js' });
+  }
+
+  // Create a new user
+  const newUser = new User({
+    email: signUpEmail,
+    password: signUpPassword,
+    firstName: signUpFirstName,
+    lastName: signUpLastName,
+    phone: signUpPhone,
+    city: signUpCity
   });
 
   await newUser.save();
 
-  res.redirect('/');
+  res.redirect('/login');
 });
+
 
 router.get('/report', (req, res) => {
   if (req.session.isAdmin == undefined) {
@@ -185,7 +213,7 @@ router.get('/report', (req, res) => {
 router.post('/report', async (req, res) => {
   try {
     // Extract the necessary data from the request body
-    const { category, description, city, streetName, streetNumber, zipCode } = req.body;
+    let { category, otherCategory, description, city, streetName, streetNumber, zipCode } = req.body;
     const activeUser = req.session.user_id;
     const urgencyMapping = ['Low', 'Medium', 'High'];
     const urgencyValue = urgencyMapping[req.body.urgency];
@@ -217,7 +245,9 @@ router.post('/report', async (req, res) => {
       location = new Location({ city, streetName, streetNumber, zipCode });
       await location.save();
     }
-
+    if (category == 'other') {
+      category = otherCategory;
+    }
     // Find or create the category based on the provided type
     let newCategory = await Category.findOne({ name: category });
     if (!newCategory) {
@@ -239,6 +269,35 @@ router.post('/report', async (req, res) => {
 
     // Save the report to the database
     const savedReport = await report.save();
+
+    transporter.sendMail(
+      {
+        ...mailOptions,
+        subject: 'New Damage Report',
+        // text: 'A new damage report has been uploaded.',
+        html: `
+      <h1>New Damage Report</h1>
+      <p>A new damage report has been uploaded.</p>
+      <h2>Report Details:</h2>
+      <ul>
+        <li><strong>Category:</strong> ${category}</li>
+        <li><strong>Description:</strong> ${description}</li>
+        <li><strong>City:</strong> ${city}</li>
+        <li><strong>Street Name:</strong> ${streetName}</li>
+        <li><strong>Street Number:</strong> ${streetNumber}</li>
+        <li><strong>ZIP Code:</strong> ${zipCode}</li>
+        <li><strong>Urgency:</strong> ${urgencyValue}</li>
+      </ul>
+    `
+      },
+      (error, info) => {
+        if (error) {
+          console.log('Error sending email:', error);
+        } else {
+          console.log('Email sent:', info.response);
+        }
+      }
+    );
 
     res.redirect('/')
   } catch (err) {
@@ -262,11 +321,9 @@ router.get('/admin', async (req, res) => {
       else {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 3;
-        const totalReports = await Report.countDocuments();
-        const totalPages = Math.ceil(totalReports / limit);
         const skip = (page - 1) * limit;
 
-        const { urgency, status } = req.query;
+        const { text, urgency, status } = req.query;
         const query = {};
 
         if (urgency && urgency !== 'all') {
@@ -277,15 +334,158 @@ router.get('/admin', async (req, res) => {
           query.status = status;
         }
 
+        if (text) {
+          query.description = { $regex: text, $options: "i" };
+        }
+        
+        const totalReports = await Report.countDocuments(query);
+        const totalPages = Math.ceil(totalReports / limit);
+
         const reports = await Report.find(query)
           .populate('category')
           .populate('location')
+          .sort({ likes: -1 })
           .skip(skip)
           .limit(limit)
           .lean();
-
-        res.render('adminDashboard', { layout: 'admin', reports, totalPages, currentPage: page });
+        reports.sort((a, b) => b.likes.length - a.likes.length);
+        
+        res.render('adminDashboard', { layout: 'admin', js: "admin.js", reports, totalPages, currentPage: page });
       }
+    }
+  }
+  catch (err) {
+    console.log(err);
+  }
+});
+
+// router.post('/admin/status/:reportId', async (req, res) => {
+//   try {
+//     let user = await User.findOne({
+//       _id: req.session.user_id
+//     }).select('+isAdmin').exec();
+
+//     if (user === null) {
+//       res.redirect('/');
+//     }
+//     else {
+//       if (req.session.isAdmin == undefined) {
+//         res.redirect('/');
+//       }
+//       else {
+//         const reportId = req.params.reportId;
+//         const newStatus = req.body.status;
+//         const report = await Report.findById(reportId).populate('user');
+//         report.status = newStatus;
+//         console.log(report.user.email)
+//         await report.save();
+//         const dynamicMailOptions = {
+//           ...mailOptions,
+//           to: report.user.email, // Set the recipient email dynamically
+//           html: `
+//             <h1>Damage Report Update</h1>
+//             <p>Your uploaded report with id:  ${reportId} has changed to  ${newStatus}</p>
+//             <h2>Report Details:</h2>
+//             <ul>
+//               <li><strong>Category:</strong> ${category}</li>
+//               <li><strong>Description:</strong> ${description}</li>
+//               <li><strong>City:</strong> ${city}</li>
+//               <li><strong>Street Name:</strong> ${streetName}</li>
+//               <li><strong>Street Number:</strong> ${streetNumber}</li>
+//               <li><strong>ZIP Code:</strong> ${zipCode}</li>
+//               <li><strong>Urgency:</strong> ${urgencyValue}</li>
+//               <!-- Add more report details if needed -->
+//             </ul>
+//           `
+//         };
+    
+//         transporter.sendMail(dynamicMailOptions, (error, info) => {
+//           if (error) {
+//             console.log('Error sending email:', error);
+//           } else {
+//             console.log('Email sent:', info.response);
+//           }
+//         });
+
+//         res.redirect('/admin');
+//       } 
+//     }
+//   }
+//   catch (err) {
+//     console.log(err);
+//   }
+// });
+
+router.post('/admin/status/:reportId', async (req, res) => {
+  try {
+    let user = await User.findOne({
+      _id: req.session.user_id
+    }).select('+isAdmin').exec();
+
+    if (user === null) {
+      res.redirect('/');
+    }
+    else {
+      if (req.session.isAdmin == undefined) {
+        res.redirect('/');
+      }
+      else {
+        const reportId = req.params.reportId;
+        const newStatus = req.body.status;
+        const report = await Report.findById(reportId)
+          .populate('user')
+          .populate({
+            path: 'location',
+            select: 'city streetName streetNumber zipCode',
+          })
+          .populate({
+            path: 'category',
+            select: 'name',
+          });
+
+        report.status = newStatus;
+        console.log(report.user.email)
+        await report.save();
+
+        // Extract the location details from the populated location object
+        const { city, streetName, streetNumber, zipCode } = report.location;
+        const { name } = report.category;
+
+        // Extract the details from the report
+        const {description, urgency, status } = report;
+
+        const dynamicMailOptions = {
+          ...mailOptions,
+          to: report.user.email, // Set the recipient email dynamically
+          html: `
+            <h1>Damage Report Update</h1>
+            <p>Your uploaded report with id:  ${reportId} has changed to  ${newStatus}</p>
+            <h2>Report Details:</h2>
+            <ul>
+              <li><strong>Category:</strong> ${name}</li>
+              <li><strong>Description:</strong> ${description}</li>
+              <li><strong>City:</strong> ${city}</li>
+              <li><strong>Street Name:</strong> ${streetName}</li>
+              <li><strong>Street Number:</strong> ${streetNumber}</li>
+              <li><strong>ZIP Code:</strong> ${zipCode}</li>
+              <li><strong>Urgency:</strong> ${urgency}</li>
+              <li><strong>Status:</strong> ${status}</li>
+              <!-- Add more report details if needed -->
+            </ul>
+          `
+        };
+
+        transporter.sendMail(dynamicMailOptions, (error, info) => {
+          if (error) {
+            console.log('Error sending email:', error);
+          } else {
+            console.log('Email sent:', info.response);
+          }
+        });
+        
+
+        res.redirect('/admin');
+      } 
     }
   }
   catch (err) {

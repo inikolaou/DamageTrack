@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import moment from 'moment';
 import fileUpload from 'express-fileupload';
 import Handlebars from 'handlebars';
+import flash from 'express-flash';
 
 mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
@@ -60,7 +61,9 @@ app.engine(
 );
 app.set("view engine", "hbs");
 
+app.use(flash());
 app.use('/', router);
+
 
 Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);

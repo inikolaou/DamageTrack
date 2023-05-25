@@ -15,10 +15,10 @@ body {
   background-position: center center;
   background-attachment: fixed;
   font-family: 'Roboto', sans-serif;
-  color: #385170;
+  /* color: #385170; */
 }
 
-.navbar {
+/* .navbar {
   position: fixed;
   top: 0;
   opacity: 1;
@@ -26,6 +26,9 @@ body {
   padding: 0;
   justify-content: space-around;
   background-color: #385170;
+} */
+.navbar {
+  justify-content: space-around;
 }
 
 .navbar-brand {

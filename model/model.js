@@ -22,7 +22,7 @@ const reportSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Pending', 'Finished'],
+    enum: ['Pending', 'Ongoing', 'Finished'],
     default: 'Pending'
   },
   image: {
