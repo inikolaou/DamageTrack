@@ -5,31 +5,6 @@ let submitBtn = document.querySelector("#submit-btn");
 let backBtn = document.querySelector("#back-btn");
 let locationLabel = document.querySelector("#location");
 
-// nextBtn.addEventListener("click", () => {
-
-//     let formFalse = false;
-//     const form = document.querySelector('.needs-validation');
-//     const formItems = document.querySelectorAll("#details-section" + " input")
-
-//     for (item of formItems) {
-//         if (!item.checkValidity()) {
-//             event.preventDefault()
-//             event.stopPropagation()
-//             formFalse = true;
-//         }
-//     }
-
-//     if (!formFalse) {
-//         detailsSection.classList.add("d-none");
-//         locationSection.classList.remove("d-none");
-//         locationLabel.style.backgroundColor = "#385170";
-//         form.classList.remove('was-validated');
-//     }
-//     else {
-//         form.classList.add('was-validated');
-//     }
-// });
-
 nextBtn.addEventListener("click", () => {
     let formFalse = false;
     const form = document.querySelector('.needs-validation');
@@ -38,6 +13,17 @@ nextBtn.addEventListener("click", () => {
     for (item of formItems) {
         if (item.type === 'file') {
             if (!isValidImageURL(item.value)) {
+                event.preventDefault();
+                event.stopPropagation();
+                formFalse = true;
+                item.classList.add('is-invalid');
+            }
+            else {
+                item.classList.remove('is-invalid');
+            }
+        }
+        else if (item.id === 'other-category') {
+            if (categorySelect.value === 'other' && !item.value) {
                 event.preventDefault();
                 event.stopPropagation();
                 formFalse = true;
@@ -70,6 +56,7 @@ nextBtn.addEventListener("click", () => {
         form.classList.add('was-validated');
     }
 });
+
 
 function isValidImageURL(url) {
     const pattern = /\.(jpeg|jpg|gif|png)$/;
@@ -114,7 +101,9 @@ let othercategorySelect = document.querySelector("#other-category")
 categorySelect.addEventListener("change", () => {
     if (categorySelect.value === "other") {
         othercategorySelect.classList.remove("d-none");
+        othercategorySelect.setAttribute("required", "required");
     } else {
         othercategorySelect.classList.add("d-none");
+        othercategorySelect.removeAttribute("required");
     }
 });
