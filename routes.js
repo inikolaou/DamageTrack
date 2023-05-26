@@ -189,7 +189,7 @@ router.post("/signup", async (req, res) => {
 
   await newUser.save();
 
-  res.redirect('/login');
+  res.redirect('/sign');
 });
 
 

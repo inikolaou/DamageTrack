@@ -1,22 +1,26 @@
-:root {
+main {
   --bs-form-control-bg: initial;
   /* --bs-heading-color: rgb(33, 37, 41); */
   --bs-form-control-bg: white;
   --bs-body-color: rgb(33, 37, 41) !important;
-  /* --bs-secondary-color: rgb(33, 37, 41) !important; */
+  --bs-secondary-color: rgb(33, 37, 41) !important;
   --bs-tertiary-bg: #ececec;
   --bs-dropdown-color: rgb(248, 249, 250);
+  --bs-secondary-bg: initial;
 }
 
-body {
+main {
   background-image: url("../../images/reportFormBackground.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
   font-family: 'Roboto', sans-serif;
-  /* color: #385170; */
+  color: #385170;
 }
+
+/* .form-control[type=file]:hover {
+} */
 
 /* .navbar {
   position: fixed;
@@ -74,8 +78,8 @@ label {
 }
 
 .btn-primary {
-  background-color: #142d4c;
-  color:#ececec;
+  /* background-color: #142d4c;
+  color:#ececec; */
   justify-content: center;
   border: none;
   border-radius: 5px;

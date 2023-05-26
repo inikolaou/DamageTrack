@@ -1,49 +1,51 @@
-<div class="row mb-5 filters">
-    <div class="col-md-4 offset-md-2 col-12 mb-3">
-        <div class="input-group">
-            <input type="text" class="form-control border border-primary" id="searchText" placeholder="Location..."
-                aria-label="Search location" aria-describedby="button-addon2">
-            <button class="btn btn-primary search" type="button" id="search">Search...</button>
+<div class="container">
+    <div class="row mb-5 filters">
+        <div class="col-md-4 offset-md-2 col-12 mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control border border-primary" id="searchText" placeholder="Location..."
+                    aria-label="Search location" aria-describedby="button-addon2">
+                <button class="btn btn-primary search" type="button" id="search">Search...</button>
+            </div>
         </div>
-    </div>
-    <div class="col-md-2 col-6 offset-md-2 mb-3">
-        <div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="urgency-dropdown"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Urgency
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="urgency-dropdown">
-                <li><a class="dropdown-item {{#unless urgency}}active{{/unless}}" href="/admin">All</a></li>
+        <div class="col-md-2 col-6 offset-md-2 mb-3">
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="urgency-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Urgency
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="urgency-dropdown">
+                    <li><a class="dropdown-item {{#unless urgency}}active{{/unless}}" href="/admin">All</a></li>
 
-                <li><a class="dropdown-item {{#ifEquals urgency "High"}}active{{/ifEquals}}"
-                        href="/admin?urgency=High">High</a></li>
-                <li><a class="dropdown-item {{#ifEquals urgency "Medium"}}active{{/ifEquals}}"
-                        href="/admin?urgency=Medium">Medium</a></li>
-                <li><a class="dropdown-item {{#ifEquals urgency "Low"}}active{{/ifEquals}}"
-                        href="/admin?urgency=Low">Low</a></li>
-            </ul>
+                    <li><a class="dropdown-item {{#ifEquals urgency " High"}}active{{/ifEquals}}"
+                            href="/admin?urgency=High">High</a></li>
+                    <li><a class="dropdown-item {{#ifEquals urgency " Medium"}}active{{/ifEquals}}"
+                            href="/admin?urgency=Medium">Medium</a></li>
+                    <li><a class="dropdown-item {{#ifEquals urgency " Low"}}active{{/ifEquals}}"
+                            href="/admin?urgency=Low">Low</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
 
 
-    <div class="col-md-2 col-6 mb-3">
-        <div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="status-dropdown"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Status
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="status-dropdown">
-                <li><a class="dropdown-item {{#unless status}}active{{/unless}}" href="/admin">All</a></li>
-                <li><a class="dropdown-item {{#ifEquals status "Pending"}}active{{/ifEquals}}"
-                        href="/admin?status=Pending">Pending</a></li>
-                <li><a class="dropdown-item {{#ifEquals status "Ongoing"}}active{{/ifEquals}}"
-                        href="/admin?status=Ongoing">Ongoing</a></li>
-                <li><a class="dropdown-item {{#ifEquals status "Finished"}}active{{/ifEquals}}"
-                        href="/admin?status=Finished">Finished</a></li>
-            </ul>
+        <div class="col-md-2 col-6 mb-3">
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="status-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Status
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="status-dropdown">
+                    <li><a class="dropdown-item {{#unless status}}active{{/unless}}" href="/admin">All</a></li>
+                    <li><a class="dropdown-item {{#ifEquals status " Pending"}}active{{/ifEquals}}"
+                            href="/admin?status=Pending">Pending</a></li>
+                    <li><a class="dropdown-item {{#ifEquals status " Ongoing"}}active{{/ifEquals}}"
+                            href="/admin?status=Ongoing">Ongoing</a></li>
+                    <li><a class="dropdown-item {{#ifEquals status " Finished"}}active{{/ifEquals}}"
+                            href="/admin?status=Finished">Finished</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
 
+    </div>
 </div>
 
 
@@ -53,7 +55,7 @@
         {{#each reports}}
 
         <div class="col">
-            <div class="card {{#ifEquals urgency "High"}}high{{else ifEquals urgency "Medium" }}medium{{else ifEquals
+            <div class="card {{#ifEquals urgency " High"}}high{{else ifEquals urgency "Medium" }}medium{{else ifEquals
                 urgency "Low" }}low{{/ifEquals}}">
                 <div class="card-header">{{urgency}}
                     <div class="image-block">
@@ -97,8 +99,8 @@
                         <li><span>Street</span> {{location.streetName}} {{location.streetNumber}}</li>
                         <li><span>ZIP Code</span> {{location.zipCode}}</li>
                         <li><span>Urgency Level</span> {{urgency}}</li>
-                        <li><span class="like-tag">{{likes.length}}<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                    fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
+                        <li><span class="like-tag">{{likes.length}}<svg xmlns="http://www.w3.org/2000/svg" width="22"
+                                    height="22" fill="red" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
                                         d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
                                     <path
@@ -111,12 +113,15 @@
                     <div class="form">
                         <form action="/admin/status/{{this._id}}" method="post" class="mt-4">
                             <div class="w-50">
-                            <label for="status" class="form-label mb-1">Status</label>
-                            <select id="status" name="status" class="form-select">
-                                <option value="Pending"{{#ifEquals status "Pending"}} selected{{/ifEquals}}>Pending</option>
-                                <option value="Ongoing"{{#ifEquals status "Ongoing"}} selected{{/ifEquals}}>Ongoing</option>
-                                <option value="Finished"{{#ifEquals status "Finished"}} selected{{/ifEquals}}>Finished</option>
-                            </select>
+                                <label for="status" class="form-label mb-1">Status</label>
+                                <select id="status" name="status" class="form-select">
+                                    <option value="Pending" {{#ifEquals status "Pending" }} selected{{/ifEquals}}>
+                                        Pending</option>
+                                    <option value="Ongoing" {{#ifEquals status "Ongoing" }} selected{{/ifEquals}}>
+                                        Ongoing</option>
+                                    <option value="Finished" {{#ifEquals status "Finished" }} selected{{/ifEquals}}>
+                                        Finished</option>
+                                </select>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -125,7 +130,7 @@
                         </form>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -136,7 +141,8 @@
     <ul class="pagination justify-content-center mt-5">
         {{#gt currentPage 1}}
         <li class="page-item">
-            <a class="page-link" id="previous" href="/admin?page={{subtract currentPage 1}}&limit={{limit}}">Previous</a>
+            <a class="page-link" id="previous"
+                href="/admin?page={{subtract currentPage 1}}&limit={{limit}}">Previous</a>
         </li>
         {{/gt}}
 
@@ -153,4 +159,3 @@
         {{/lt}}
     </ul>
 </nav>
-

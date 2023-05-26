@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <title>Admin dashboard</title>
@@ -16,7 +16,7 @@
     {{/if}}
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="check2" viewBox="0 0 16 16">
             <path
@@ -86,7 +86,9 @@
     </div>
 
     {{>adm_header}}
-    {{{body}}}
+    <main class="flex-shrink-0 mb-1">
+        {{{body}}}
+    </main>
     {{>footer}}
 </body>
 
