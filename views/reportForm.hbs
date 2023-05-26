@@ -36,7 +36,9 @@
 
             <div id="other-category" class="mb-4 w-50 d-none">
                 <label for="other-category" class="form-label mb-3">Other Category</label>
-                <input type="text" id="other-category" name="otherCategory" class="form-control">
+                <input type="text" id="other-category" name="otherCategory" class="form-control oninput="this.style.border='1px solid #ced4da';"
+                    oninvalid="this.style.border='1px solid red';"
+                    onvalid="this.style.border='1px solid green';"">
             </div>
 
             <div class="mb-4">

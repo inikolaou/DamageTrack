@@ -143,7 +143,7 @@ router.post("/login", async (req, res) => {
 
   // User not authenticated
   if (user.length === 0) {
-    res.redirect('/sign');
+    return res.render('signupLogin', { js : 'user_notexists.js' });
   }
   else {
     const match = await bcrypt.compare(req.body['loginPassword'], user[0]['password']);
@@ -166,21 +166,6 @@ router.post("/login", async (req, res) => {
   }
 }
 );
-
-// router.post("/signup", async (req, res) => {
-//   let newUser = new User({
-//     email: req.body['signUpEmail'],
-//     password: req.body['signUpPassword'],
-//     firstName: req.body['signUpFirstName'],
-//     lastName: req.body['signUpLastName'],
-//     phone: req.body['signUpPhone'],
-//     city: req.body['signUpCity']
-//   });
-
-//   await newUser.save();
-
-//   res.redirect('/');
-// });
 
 router.post("/signup", async (req, res) => {
   const { signUpEmail, signUpPassword, signUpFirstName, signUpLastName, signUpPhone, signUpCity } = req.body;

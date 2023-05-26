@@ -5,17 +5,58 @@ let submitBtn = document.querySelector("#submit-btn");
 let backBtn = document.querySelector("#back-btn");
 let locationLabel = document.querySelector("#location");
 
-nextBtn.addEventListener("click", () => {
+// nextBtn.addEventListener("click", () => {
 
+//     let formFalse = false;
+//     const form = document.querySelector('.needs-validation');
+//     const formItems = document.querySelectorAll("#details-section" + " input")
+
+//     for (item of formItems) {
+//         if (!item.checkValidity()) {
+//             event.preventDefault()
+//             event.stopPropagation()
+//             formFalse = true;
+//         }
+//     }
+
+//     if (!formFalse) {
+//         detailsSection.classList.add("d-none");
+//         locationSection.classList.remove("d-none");
+//         locationLabel.style.backgroundColor = "#385170";
+//         form.classList.remove('was-validated');
+//     }
+//     else {
+//         form.classList.add('was-validated');
+//     }
+// });
+
+nextBtn.addEventListener("click", () => {
     let formFalse = false;
     const form = document.querySelector('.needs-validation');
-    const formItems = document.querySelectorAll("#details-section" + " input")
+    const formItems = document.querySelectorAll("#details-section input, #details-section textarea, #details-section input[type=file]");
 
     for (item of formItems) {
-        if (!item.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-            formFalse = true;
+        if (item.type === 'file') {
+            if (!isValidImageURL(item.value)) {
+                event.preventDefault();
+                event.stopPropagation();
+                formFalse = true;
+                item.classList.add('is-invalid');
+            }
+            else {
+                item.classList.remove('is-invalid');
+            }
+        }
+        else {
+            if (!item.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+                formFalse = true;
+                item.classList.add('is-invalid');
+            }
+            else {
+                item.classList.remove('is-invalid');
+            }
         }
     }
 
@@ -28,17 +69,13 @@ nextBtn.addEventListener("click", () => {
     else {
         form.classList.add('was-validated');
     }
-
-
-    // if (category.value && description.value && photo.value) {
-    //     detailsSection.classList.add("d-none");
-    //     locationSection.classList.remove("d-none");
-    //     locationLabel.style.backgroundColor = "#33cccc";
-    // }
-    // else {
-    //  alert("Please fill in all required fields");
-    // }
 });
+
+function isValidImageURL(url) {
+    const pattern = /\.(jpeg|jpg|gif|png)$/;
+    return pattern.test(url);
+}
+
 
 submitBtn.addEventListener("click", () => {
 

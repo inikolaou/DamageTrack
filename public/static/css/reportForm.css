@@ -1,9 +1,9 @@
 :root {
   --bs-form-control-bg: initial;
-  --bs-heading-color: rgb(33, 37, 41);
+  /* --bs-heading-color: rgb(33, 37, 41); */
   --bs-form-control-bg: white;
   --bs-body-color: rgb(33, 37, 41) !important;
-  --bs-secondary-color: rgb(33, 37, 41) !important;
+  /* --bs-secondary-color: rgb(33, 37, 41) !important; */
   --bs-tertiary-bg: #ececec;
   --bs-dropdown-color: rgb(248, 249, 250);
 }
@@ -53,6 +53,10 @@ body {
   max-width: 650px;
 }
 
+::placeholder {
+  color: grey !important; /* Change the color to your desired value */
+}
+
 
 .form-control {
   border-radius: 5px;
@@ -71,6 +75,7 @@ label {
 
 .btn-primary {
   background-color: #142d4c;
+  color:#ececec;
   justify-content: center;
   border: none;
   border-radius: 5px;
@@ -85,6 +90,7 @@ label {
   background-color: #385170;
   transform: translateY(-2px);
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+  color:#ececec !important
 }
 
 

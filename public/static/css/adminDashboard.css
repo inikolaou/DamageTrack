@@ -36,6 +36,21 @@ body {
 .modal-body p {
     font-style: italic;
 }
+[data-bs-theme=light] .text-body-secondary, [data-bs-theme=auto] .text-body-secondary {
+    color: #385170 !important;
+}
+
+[data-bs-theme=dark] .text-body-secondary {
+    color: #ececec !important;
+}
+[data-bs-theme=light] .nav-link, [data-bs-theme=auto] .nav-link {
+    color: #385170 !important;
+}
+
+[data-bs-theme=dark] .nav-link {
+    color: #ececec !important;
+}
+
 
 .dropdown-item.active {
     background-color: #33cccc;
@@ -47,6 +62,10 @@ body {
 
 #button-addon2 {
     z-index: 0;
+}
+
+.btn.search {
+    z-index: -1;
 }
 
 .image-block {

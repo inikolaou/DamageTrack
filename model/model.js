@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const reportSchema = new mongoose.Schema({
   description: {
@@ -132,7 +133,7 @@ async function createSuperUser() {
     lastName: 'Doe',
     phone: '1234567890',
     city: 'New York',
-    password: 'admin',
+    password: bcrypt.hashSync('admin', 10),
     isAdmin: true
   });
 
