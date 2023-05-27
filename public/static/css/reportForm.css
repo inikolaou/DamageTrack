@@ -97,6 +97,9 @@ label {
   color:#ececec !important
 }
 
+.bi my-1 theme-icon-active{
+  color: #ececec !important;
+}
 
 #details {
   background-color: #385170;

@@ -35,6 +35,12 @@ body {
 .modal-body p {
     font-style: italic;
 }
+
+#bd-theme {
+    background-color: #712cf9 !important; /* Replace "red" with your desired background color */
+}
+
+
 [data-bs-theme=light] .text-body-secondary, [data-bs-theme=auto] .text-body-secondary {
     color: #385170 !important;
 }
