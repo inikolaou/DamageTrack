@@ -22,6 +22,9 @@
   },
   "homepage": "https://github.com/johnnikolaou/DamageTrack#readme",
   "type": "module",
+  "engines": {
+    "node": "18.16"
+  },
   "devDependencies": {
     "nodemon": "^2.0.22"
   },
