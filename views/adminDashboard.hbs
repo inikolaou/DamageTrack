@@ -2,7 +2,7 @@
     <div class="row mb-5 filters">
         <div class="col-md-4 offset-md-2 col-12 mb-3">
             <div class="input-group">
-                <input type="text" class="form-control border border-primary" id="searchText" placeholder="Location..."
+                <input type="text" class="form-control border border-primary" id="searchText" placeholder="Search..."
                     aria-label="Search location" aria-describedby="button-addon2">
                 <button class="btn btn-primary search" type="button" id="search">Search...</button>
             </div>
@@ -16,11 +16,11 @@
                 <ul class="dropdown-menu" aria-labelledby="urgency-dropdown">
                     <li><a class="dropdown-item {{#unless urgency}}active{{/unless}}" href="/admin">All</a></li>
 
-                    <li><a class="dropdown-item {{#ifEquals urgency " High"}}active{{/ifEquals}}"
+                    <li><a class="dropdown-item {{#ifEquals urgency "High"}}active{{/ifEquals}}"
                             href="/admin?urgency=High">High</a></li>
-                    <li><a class="dropdown-item {{#ifEquals urgency " Medium"}}active{{/ifEquals}}"
+                    <li><a class="dropdown-item {{#ifEquals urgency "Medium"}}active{{/ifEquals}}"
                             href="/admin?urgency=Medium">Medium</a></li>
-                    <li><a class="dropdown-item {{#ifEquals urgency " Low"}}active{{/ifEquals}}"
+                    <li><a class="dropdown-item {{#ifEquals urgency "Low"}}active{{/ifEquals}}"
                             href="/admin?urgency=Low">Low</a></li>
                 </ul>
             </div>
@@ -55,7 +55,7 @@
         {{#each reports}}
 
         <div class="col">
-            <div class="card {{#ifEquals urgency " High"}}high{{else ifEquals urgency "Medium" }}medium{{else ifEquals
+            <div class="card {{#ifEquals urgency "High"}}high{{else ifEquals urgency "Medium" }}medium{{else ifEquals
                 urgency "Low" }}low{{/ifEquals}}">
                 <div class="card-header">{{urgency}}
                     <div class="image-block">

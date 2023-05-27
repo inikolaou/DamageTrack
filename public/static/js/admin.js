@@ -65,16 +65,15 @@ try {
     const searchButton = document.getElementById("search");
     const text = document.getElementById("searchText");
     searchButton.addEventListener('click', (event) => {
-        console.log("pressed")
         
         if (queryString.includes("urgency")) {
-            window.location.href = "/admin/?text=" + text.value + "&urgency=" + searchParams.get('urgency');
+            window.location.href = "/admin?text=" + text.value + "&urgency=" + searchParams.get('urgency');
         }
         else if (queryString.includes('status')) {
-            window.location.href = "/admin/?text=" + text.value + "&status=" + searchParams.get('status');
+            window.location.href = "/admin?text=" + text.value + "&status=" + searchParams.get('status');
         }
         else {
-            window.location.href = "/admin/?text=" + text.value
+            window.location.href = "/admin?text=" + text.value
         }
     });
 }
