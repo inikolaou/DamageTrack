@@ -113,6 +113,9 @@ router.get('/like/:reportId', async (req, res) => {
   }
 });
 
+router.get(/^\/sign\/$/, (req, res) => {
+  res.redirect("/sign");
+})
 
 router.get('/sign', (req, res) => {
   if (req.session.mySessionName == undefined) {
@@ -192,6 +195,9 @@ router.post("/signup", async (req, res) => {
   res.redirect('/sign');
 });
 
+router.get(/^\/report\/$/, (req, res) => {
+  res.redirect("/report");
+})
 
 router.get('/report', (req, res) => {
   if (req.session.isAdmin == undefined) {
@@ -296,6 +302,10 @@ router.post('/report', async (req, res) => {
     res.status(500).json({ error: err.message }); // Handle any errors
   }
 });
+
+router.get(/^\/admin\/$/, (req, res) => {
+  res.redirect("/admin");
+})
 
 router.get('/admin', async (req, res) => {
   try {
