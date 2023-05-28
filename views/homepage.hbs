@@ -35,8 +35,8 @@
                 <div class="col-md-4 offset-md-2 col-12 mb-3">
                     <div class="input-group">
                         <input type="text" class="form-control border border-primary" id="searchText"
-                            placeholder="Search..." aria-label="Search location" aria-describedby="button-addon2">
-                        <button class="btn btn-primary z-0" type="button" id="search">Search...</button>
+                            placeholder="Description..." aria-label="Search location" aria-describedby="button-addon2">
+                        <button class="btn btn-primary z-0" type="button" id="search">Search</button>
                     </div>
                 </div>
 
@@ -205,9 +205,9 @@
                                         <div id="{{_id}}"
                                             class="likeButton position-absolute top-0 start-0 number-position badge rounded-pill bg-info link-underline link-underline-opacity-0">
                                             {{#if (likesInclude likes @root.user_id)}}
-                                            I am not interested
-                                            {{else}}
                                             I am interested
+                                            {{else}}
+                                            I am not interested
                                             {{/if}}
                                             <span class="visually-hidden">unread messages</span>
                                         </div>
@@ -216,7 +216,9 @@
                                 </div>
                                 <small class="text-body-secondary">{{moment createdAt}}</small>
                             </div>
+                            {{#unless @root.all}}
                             <p class="card-subtitle mt-2 text-body-secondary">Status: {{status}}</p>
+                            {{/unless}}
                         </div>
                     </div>
                 </div>

@@ -135,3 +135,7 @@ section {
 .likeButton {
     cursor: pointer;
 }
+
+#searchText {
+    z-index: 0;
+}
