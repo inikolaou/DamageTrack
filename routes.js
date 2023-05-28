@@ -351,62 +351,6 @@ router.get('/admin', async (req, res) => {
   }
 });
 
-// router.post('/admin/status/:reportId', async (req, res) => {
-//   try {
-//     let user = await User.findOne({
-//       _id: req.session.user_id
-//     }).select('+isAdmin').exec();
-
-//     if (user === null) {
-//       res.redirect('/');
-//     }
-//     else {
-//       if (req.session.isAdmin == undefined) {
-//         res.redirect('/');
-//       }
-//       else {
-//         const reportId = req.params.reportId;
-//         const newStatus = req.body.status;
-//         const report = await Report.findById(reportId).populate('user');
-//         report.status = newStatus;
-//         console.log(report.user.email)
-//         await report.save();
-//         const dynamicMailOptions = {
-//           ...mailOptions,
-//           to: report.user.email, // Set the recipient email dynamically
-//           html: `
-//             <h1>Damage Report Update</h1>
-//             <p>Your uploaded report with id:  ${reportId} has changed to  ${newStatus}</p>
-//             <h2>Report Details:</h2>
-//             <ul>
-//               <li><strong>Category:</strong> ${category}</li>
-//               <li><strong>Description:</strong> ${description}</li>
-//               <li><strong>City:</strong> ${city}</li>
-//               <li><strong>Street Name:</strong> ${streetName}</li>
-//               <li><strong>Street Number:</strong> ${streetNumber}</li>
-//               <li><strong>ZIP Code:</strong> ${zipCode}</li>
-//               <li><strong>Urgency:</strong> ${urgencyValue}</li>
-//               <!-- Add more report details if needed -->
-//             </ul>
-//           `
-//         };
-    
-//         transporter.sendMail(dynamicMailOptions, (error, info) => {
-//           if (error) {
-//             console.log('Error sending email:', error);
-//           } else {
-//             console.log('Email sent:', info.response);
-//           }
-//         });
-
-//         res.redirect('/admin');
-//       } 
-//     }
-//   }
-//   catch (err) {
-//     console.log(err);
-//   }
-// });
 
 router.post('/admin/status/:reportId', async (req, res) => {
   try {
@@ -484,5 +428,29 @@ router.post('/admin/status/:reportId', async (req, res) => {
     console.log(err);
   }
 });
+
+router.post('/admin/delete/:reportId', async (req, res) => {
+  try {
+    let user = await User.findOne({
+      _id: req.session.user_id
+    }).select('+isAdmin').exec();
+
+    if (user === null) {
+      res.redirect('/');
+    } else {
+        if (req.session.isAdmin == undefined) {
+          res.redirect('/');
+        } 
+        else {
+          const reportId = req.params.reportId;
+          await Report.findByIdAndRemove(reportId);
+          res.redirect('/admin');
+        }
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 
 export { router };
