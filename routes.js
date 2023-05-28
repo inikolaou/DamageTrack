@@ -109,10 +109,10 @@ router.get('/like/:reportId', async (req, res) => {
     await report.save();
 
     if (postLiked) {
-      res.send({ "likes": report.likes.length, "text": "I am not interested" });
+      res.send({ "likes": report.likes.length, "text": "I am interested" });
     }
     else {
-      res.send({ "likes": report.likes.length, "text": "I am interested"  });
+      res.send({ "likes": report.likes.length, "text": "I am not interested"  });
     }
   } catch (err) {
     console.error('Error updating likes', err);
