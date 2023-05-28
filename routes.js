@@ -446,7 +446,7 @@ router.post('/admin/status/:reportId', async (req, res) => {
   }
 });
 
-router.post('/admin/delete/:reportId', async (req, res) => {
+router.get('/admin/delete/:reportId', async (req, res) => {
   try {
     let user = await User.findOne({
       _id: req.session.user_id
