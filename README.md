@@ -5,7 +5,7 @@ You can view our website at [https://damagetrack.herokuapp.com](https://damagetr
 
 ### Prerequisites
 
-* mongodb - You need to have access to a mongodb database and its connection string
+* mongodb - If you're not using docker you need to have access to a mongodb database and its connection string
 * To use the mailing capabilities of our application you need to fill the adminEmail_code variable below - For more details [click here](https://support.google.com/accounts/answer/185833)
 
 ### Installation
