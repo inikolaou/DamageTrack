@@ -92,12 +92,14 @@ router.get('/like/:reportId', async (req, res) => {
   try {
     // Find the post with the given ID
     const report = await Report.findById(reportId);
+    let postLiked = true;
 
     // Check if the user ID is already in the likes array
     const userIndex = report.likes.indexOf(userId);
     if (userIndex !== -1) {
       // User has already liked the post, so remove the like
       report.likes.splice(userIndex, 1);
+      postLiked = false;
     } else {
       // User has not liked the post, so add the like
       report.likes.push(userId);
@@ -106,7 +108,12 @@ router.get('/like/:reportId', async (req, res) => {
     // Save the updated post
     await report.save();
 
-    res.redirect('/');
+    if (postLiked) {
+      res.send({ "likes": report.likes.length, "text": "I am not interested" });
+    }
+    else {
+      res.send({ "likes": report.likes.length, "text": "I am interested"  });
+    }
   } catch (err) {
     console.error('Error updating likes', err);
     res.status(500).send('Internal Server Error');
@@ -146,7 +153,7 @@ router.post("/login", async (req, res) => {
 
   // User not authenticated
   if (user.length === 0) {
-    return res.render('signupLogin', { js : 'user_notexists.js' });
+    return res.render('signupLogin', { js: 'user_notexists.js' });
   }
   else {
     const match = await bcrypt.compare(req.body['loginPassword'], user[0]['password']);
@@ -177,7 +184,7 @@ router.post("/signup", async (req, res) => {
   const existingUser = await User.findOne({ email: signUpEmail });
 
   if (existingUser) {
-    return res.render('signupLogin', { js : 'user_exists.js' });
+    return res.render('signupLogin', { js: 'user_exists.js' });
   }
 
   // Create a new user
@@ -339,7 +346,7 @@ router.get('/admin', async (req, res) => {
         if (text) {
           query.description = { $regex: text, $options: "i" };
         }
-        
+
         const totalReports = await Report.countDocuments(query);
         const totalPages = Math.ceil(totalReports / limit);
 
@@ -351,7 +358,7 @@ router.get('/admin', async (req, res) => {
           .limit(limit)
           .lean();
         reports.sort((a, b) => b.likes.length - a.likes.length);
-        
+
         res.render('adminDashboard', { layout: 'admin', js: "admin.js", reports, totalPages, currentPage: page });
       }
     }
@@ -400,7 +407,7 @@ router.get('/admin', async (req, res) => {
 //             </ul>
 //           `
 //         };
-    
+
 //         transporter.sendMail(dynamicMailOptions, (error, info) => {
 //           if (error) {
 //             console.log('Error sending email:', error);
@@ -454,7 +461,7 @@ router.post('/admin/status/:reportId', async (req, res) => {
         const { name } = report.category;
 
         // Extract the details from the report
-        const {description, urgency, status } = report;
+        const { description, urgency, status } = report;
 
         const dynamicMailOptions = {
           ...mailOptions,
@@ -484,10 +491,10 @@ router.post('/admin/status/:reportId', async (req, res) => {
             console.log('Email sent:', info.response);
           }
         });
-        
+
 
         res.redirect('/admin');
-      } 
+      }
     }
   }
   catch (err) {

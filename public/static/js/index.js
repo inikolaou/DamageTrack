@@ -105,3 +105,26 @@ try {
 catch (err) {
 
 }
+
+try {
+    const likeButtons = document.querySelectorAll('.likeButton');
+
+    for (let likeButton of likeButtons) {
+        likeButton.addEventListener('click', (event) => {
+            const url = `/like/${likeButton.id}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    likeButton.parentNode.children[0].textContent = data.likes;
+                    likeButton.textContent = data.text;
+                })
+                .catch(error => {
+                    console.log('Error:', error);
+                });
+        });
+    }
+}
+catch (err) {
+
+}

@@ -191,22 +191,26 @@
                                 <div>
                                     <small class="position-relative">
                                         {{#if likes}}
-                                        {{likes.length}}
+                                        <span class="likeCount">
+                                            {{likes.length}}
+                                        </span>
                                         {{/if}}
                                         {{#unless likes}}
-                                        0
+                                        <span class="likeCount">
+                                            0
+                                        </span>
                                         {{/unless}}
                                         People are interested
                                         {{#if @root.all}}
-                                        <a href="like/{{_id}}"
-                                            class="position-absolute top-0 start-0 number-position badge rounded-pill bg-info link-underline link-underline-opacity-0">
+                                        <div id="{{_id}}"
+                                            class="likeButton position-absolute top-0 start-0 number-position badge rounded-pill bg-info link-underline link-underline-opacity-0">
                                             {{#if (likesInclude likes @root.user_id)}}
                                             I am not interested
                                             {{else}}
                                             I am interested
                                             {{/if}}
                                             <span class="visually-hidden">unread messages</span>
-                                        </a>
+                                        </div>
                                         {{/if}}
                                     </small>
                                 </div>
