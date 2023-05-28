@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import 'dotenv/config'
 
 const reportSchema = new mongoose.Schema({
   description: {
@@ -128,12 +129,12 @@ async function createReport() {
 
 async function createSuperUser() {
   const user = new User({
-    email: 'example@example.com',
+    email: process.env.adminEmail,
     firstName: 'admin',
     lastName: 'Doe',
     phone: '1234567890',
     city: 'New York',
-    password: bcrypt.hashSync('admin', 10),
+    password: bcrypt.hashSync('admin123', 10),
     isAdmin: true
   });
 
