@@ -1,18 +1,19 @@
 import nodemailer from 'nodemailer';
+import 'dotenv/config'
 
 // Create a transporter object using your Gmail account credentials
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: 'od.kopakakis@gmail.com',
-    pass: 'efnylykbiljlhtbs',
+    user: process.env.adminEmail,
+    pass: process.env.adminEmail_code,
   },
 });
 
 // Construct the email message
 const mailOptions = {
-  from: 'od.kopakakis@gmail.com',
-  to: 'od.kopakakis@gmail.com',
+  from: process.env.adminEmail,
+  to: process.env.adminEmail,
   subject: 'New Damage Report',
   text: 'A new damage report has been uploaded.',
 };
