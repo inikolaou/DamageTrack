@@ -26,6 +26,16 @@ body {
     color: white
 }
 
+.delete{
+    background-color: rgb(187, 68, 68);
+    color: white
+}
+
+.delete:hover{
+    background-color: rgb(158, 70, 70);
+    color: white;
+}
+
 .modal-body li span {
     font-weight: bold;
     border-right: 3px solid #33cccc;
