@@ -153,7 +153,7 @@ router.post("/login", async (req, res) => {
 
   // User not authenticated
   if (user.length === 0) {
-    return res.render('signupLogin', { js: 'user_notexists.js' });
+    return res.render('error', { js: 'user_notexists.js' });
   }
   else {
     const match = await bcrypt.compare(req.body['loginPassword'], user[0]['password']);
@@ -171,7 +171,7 @@ router.post("/login", async (req, res) => {
       }
     }
     else {
-      res.redirect("/");
+      return res.render('error', { js: 'user_wrongpassword.js' });
     }
   }
 }
@@ -184,7 +184,7 @@ router.post("/signup", async (req, res) => {
   const existingUser = await User.findOne({ email: signUpEmail });
 
   if (existingUser) {
-    return res.render('signupLogin', { js: 'user_exists.js' });
+    return res.render('error', { js: 'user_exists.js' });
   }
 
   // Create a new user
