@@ -207,11 +207,12 @@ router.get(/^\/report\/$/, (req, res) => {
 })
 
 router.get('/report', (req, res) => {
-  if (req.session.isAdmin == undefined) {
-    res.render('reportForm', { layout: 'report' });
+  if (req.session.mySessionName === undefined) {
+    res.redirect('/');
+    
   }
   else {
-    res.redirect('/admin');
+    res.render('reportForm', { layout: 'report' });
   }
 });
 
