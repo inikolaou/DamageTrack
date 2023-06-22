@@ -134,7 +134,7 @@ async function createSuperUser() {
     lastName: 'Doe',
     phone: '1234567890',
     city: 'New York',
-    password: bcrypt.hashSync('admin123', 10),
+    password: bcrypt.hashSync(process.env.adminPassword, 10),
     isAdmin: true
   });
 

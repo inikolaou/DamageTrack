@@ -21,6 +21,7 @@ You can view our website at [https://damagetrack.herokuapp.com](https://damagetr
    PORT = 3000
    DB_URL = 'ENTER YOUR MONGO DATABASE CONNECTION STRING'
    adminEmail = 'ENTER YOUR EMAIL'
+   adminPassword = 'ENTER THE PASSWORD FOR LOGGING IN WITH ADMIN ACCOUNT'
    adminEmail_code = 'ENTER THE CODE FROM GMAIL'
    ```
    
