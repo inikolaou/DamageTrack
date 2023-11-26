@@ -20,7 +20,7 @@
    DB_URL = 'ENTER YOUR MONGO DATABASE CONNECTION STRING'
    adminEmail = 'ENTER YOUR EMAIL'
    adminPassword = 'ENTER THE PASSWORD FOR LOGGING IN WITH ADMIN ACCOUNT'
-   adminEmail_code = 'ENTER THE CODE FROM GMAIL'
+   adminEmail_code = 'ENTER THE APP PASSWORD FROM GMAIL'
    ```
    
 ### Building with docker
