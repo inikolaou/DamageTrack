@@ -1,5 +1,3 @@
-You can view our website at [https://damagetrack.herokuapp.com](https://damagetrack.herokuapp.com)
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
